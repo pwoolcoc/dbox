@@ -1,0 +1,13 @@
+* All the API functions are stubbed out, now they just need to be filled in
+  with details, so they actually do what they are supposed to.
+* Need to make sure the correct errors are getting returned.
+* Need to back through and fix all occurences of the `Metadata` type to be what
+  it is actually supposed to be. Here are all the `Metadata` types I have
+  encountered so far:
+
+    * FileMetadata
+    * FolderMetadata
+    * PathLinkMetadata
+    * SharedFolderMetadata
+    * LinkMetadata
+    * more?
