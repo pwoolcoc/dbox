@@ -1,0 +1,73 @@
+= Unofficial Dropbox SDK for Rust
+
+This is an (unofficial, as in not endorsed by) Dropbox SDK for
+https://rust-lang.org[Rust]. At present it is not complete, though the API is
+mostly fleshed out.
+
+Currently it uses https://hyperium.github.io[Hyper] to communicate with the
+Dropbox API, but this is swappable, to allow a user to use their preferred HTTP
+library, or use more advanced features.
+
+It is also very much lacking in tests and documentation.
+
+== Examples
+
+
+[source,rust]
+.Basic example
+----
+extern crate dropbox;
+
+use dropbox::client::Client;
+use dropbox::files;
+
+const ACCESS_TOKEN: &'static str = "MY_ACCESS_TOKEN";
+
+fn main() {
+    let client = Client::new(ACCESS_TOKEN);
+    match files::list_folder(&client, "/foldername") {
+        Ok(folderlist) => {
+            // do something with folderlist
+        },
+        Err(e) => panic!(e),
+    }
+}
+----
+
+
+[source,rust]
+.With non-Hyper client
+----
+// compile with `cargo build --no-default-features`
+extern crate dropbox;
+extern crate serde;
+
+use dropbox::{DropboxClient, Result, Response};
+use dropbox::files;
+use serde::ser;
+
+struct MyClient;
+
+impl DropboxClient for MyClient {
+    fn access_token() -> &str {
+        // return access token
+    }
+
+    fn request<T>(&self, url: &str, headers: &mut BTreeMap<String, String>, body: &T) -> Result<Response>
+        where T: ser::Serialize
+    {
+        // implement http request here
+    }
+}
+
+fn main() {
+    let client = MyClient;
+    match files::list_folder(&client, "/foldername") {
+        Ok(folderlist) => {
+            // do something with folderlist
+        },
+        Err(e) => panic!(e),
+    }
+}
+----
+
