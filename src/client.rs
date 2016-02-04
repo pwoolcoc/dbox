@@ -1,5 +1,6 @@
 use super::{ApiError, Result, Response, Endpoint, DropboxClient};
 use hyper::client as hyper_client;
+use hyper::error as hyper_error;
 use hyper::header::{Headers, Authorization, Bearer, ContentType};
 use hyper::mime::{Mime, TopLevel, SubLevel};
 use hyper::status::StatusCode;
@@ -68,11 +69,15 @@ impl DropboxClient for Client {
         self.token.as_ref()
     }
 
-    fn request<T>(&self, endpoint: Endpoint, url: &str, headers: &mut BTreeMap<String, String>, body: &T) -> Result<Response>
+    fn request<T: Clone>(&self, endpoint: Endpoint, url: &str, headers: &mut BTreeMap<String, String>, body: Option<T>) -> Result<Response>
             where T: ser::Serialize
     {
         let endpoint = format!("{}", endpoint);
         let url = format!("https://{}.dropboxapi.com/2/{}", endpoint, url);
+        let sbody = {
+            let body = body.clone();
+            serde_json::to_string(&body).unwrap()
+        };
 
         let mut hheaders = Headers::new();
 
@@ -88,18 +93,18 @@ impl DropboxClient for Client {
             )
         );
         let hclient = hyper_client::Client::new();
-        let body = try!(serde_json::to_string(body));
-        match hclient.post(&url)
-                     .body(&body)
-                     .headers(hheaders)
-                     .send()
-        {
+        let mut builder = hclient.post(&url).headers(hheaders);
+        if body.is_some() {
+            builder = builder.body(&sbody);
+        }
+        match builder.send() {
             Ok(mut res) => {
                 match res.status {
                     StatusCode::Ok => {
                         let mut _body = String::new();
                         res.read_to_string(&mut _body);
                         let status_raw = res.status_raw();
+                        let json: serde_json::Value = try!(serde_json::from_str(&_body));
                         Ok(Response {
                             _status: 200,
                             _body: _body,
@@ -108,13 +113,16 @@ impl DropboxClient for Client {
                     _ => {
                         let mut _body = String::new();
                         res.read_to_string(&mut _body);
+                        println!("{:?}", _body);
                         let json: serde_json::Value = try!(serde_json::from_str(&_body));
+                        println!("{:?}", json);
                         Err(ApiError::ClientError)
                     }
                 }
 
             },
             Err(e) => {
+                println!("{:?}", e);
                 Err(ApiError::ClientError)
             }
         }

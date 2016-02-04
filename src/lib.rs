@@ -45,15 +45,15 @@ impl fmt::Display for Endpoint {
 
 pub trait DropboxClient {
     fn access_token(&self) -> &str;
-    fn request<T>(&self, endpoint: Endpoint, url: &str, headers: &mut BTreeMap<String, String>, body: &T) -> Result<Response> where T: ser::Serialize;
+    fn request<T: Clone>(&self, endpoint: Endpoint, url: &str, headers: &mut BTreeMap<String, String>, body: Option<T>) -> Result<Response> where T: ser::Serialize;
 
-    fn api<T>(&self, url: &str, headers: &mut BTreeMap<String, String>, body: &T) -> Result<Response>
+    fn api<T: Clone>(&self, url: &str, headers: &mut BTreeMap<String, String>, body: Option<T>) -> Result<Response>
             where T: ser::Serialize
     {
         self.request(Endpoint::Api, url, headers, body)
     }
 
-    fn content<T>(&self, url: &str, headers: &mut BTreeMap<String, String>, body: &T) -> Result<Response>
+    fn content<T: Clone>(&self, url: &str, headers: &mut BTreeMap<String, String>, body: Option<T>) -> Result<Response>
             where T: ser::Serialize
     {
         self.request(Endpoint::Content, url, headers, body)
@@ -140,6 +140,7 @@ mod tests {
     use std::str;
     use std::env;
     use std::default::Default;
+    use serde_json;
 
     const ACCESS_TOKEN: &'static str = "DROPBOX_TOKEN";
     const MALFORMED_TOKEN: &'static str = "asdf";
@@ -167,7 +168,10 @@ mod tests {
 
     #[test]
     fn test_list_rpc() {
-        let access_token = env::var(ACCESS_TOKEN).unwrap();
+        let access_token = match env::var(ACCESS_TOKEN) {
+            Ok(t) => t,
+            Err(_) => panic!("No {} found", ACCESS_TOKEN),
+        };
         let client = Client::new(&access_token).unwrap();
         files::create_folder(&client, "");
         assert!(files::list_folder(&client, "").is_ok());
@@ -175,7 +179,10 @@ mod tests {
 
     #[test]
     fn test_upload_download() {
-        let access_token = env::var(ACCESS_TOKEN).unwrap();
+        let access_token = match env::var(ACCESS_TOKEN) {
+            Ok(t) => t,
+            Err(_) => panic!("No {} found", ACCESS_TOKEN),
+        };
         let random_filename = random_ascii_letters(15);
         let now: DateTime<Local> = Local::now();
         let now = format!("{}", now.timestamp());
@@ -188,7 +195,8 @@ mod tests {
         assert!(files::copy_(&client, &random_path, &format!("/Test/{}/{}copy", now, random_filename)).is_ok());
 
         let (metadata, resp) = files::download(&client, &random_path).unwrap();
-        assert_eq!(&resp.body(), &random_contents);
+        let body: serde_json::Value = serde_json::from_str(&resp.body()).unwrap();
+        assert_eq!(&body.as_string().unwrap(), &random_contents);
 
         assert!(files::delete(&client, &format!("/Test/{}", now)).is_ok());
     }
