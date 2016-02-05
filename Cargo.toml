@@ -2,7 +2,6 @@
 name = "dropbox"
 version = "0.1.0"
 authors = ["Paul Woolcock <paul@woolcock.us>"]
-build = "build.rs"
 license = "MIT/Apache-2.0"
 readme = "README.adoc"
 description = """
@@ -17,12 +16,7 @@ hyper-client = ["hyper"]
 [dependencies]
 hyper = { version = "~0.7.2", optional = true }
 chrono = "~0.2.17"
-serde = "~0.6.7"
-serde_json = "~0.6.0"
+rustc-serialize = "~0.3"
 
 [dev-dependencies]
 rand = "~0.3.12"
-
-[build-dependencies]
-serde_codegen = "*"
-syntex = "*"

@@ -8,8 +8,8 @@ use hyper::http::RawStatus;
 use std::io::Read;
 use std::collections::BTreeMap;
 use std::fmt;
-use serde::ser;
-use serde_json;
+use rustc_serialize;
+use rustc_serialize::json;
 
 #[derive(Debug, Clone, PartialEq)]
 pub struct Client {
@@ -69,14 +69,14 @@ impl DropboxClient for Client {
         self.token.as_ref()
     }
 
-    fn request<T: Clone>(&self, endpoint: Endpoint, url: &str, headers: &mut BTreeMap<String, String>, body: Option<T>) -> Result<Response>
-            where T: ser::Serialize
+    fn request<T>(&self, endpoint: Endpoint, url: &str, headers: &mut BTreeMap<String, String>, body: Option<T>) -> Result<Response>
+            where T: rustc_serialize::Decodable
     {
         let endpoint = format!("{}", endpoint);
         let url = format!("https://{}.dropboxapi.com/2/{}", endpoint, url);
         let sbody = {
             let body = body.clone();
-            serde_json::to_string(&body).unwrap()
+            json::decode(&body).unwrap()
         };
 
         let mut hheaders = Headers::new();
@@ -104,7 +104,7 @@ impl DropboxClient for Client {
                         let mut _body = String::new();
                         res.read_to_string(&mut _body);
                         let status_raw = res.status_raw();
-                        let json: serde_json::Value = try!(serde_json::from_str(&_body));
+                        let json: json::Json = try!(json::decode(&_body));
                         Ok(Response {
                             _status: 200,
                             _body: _body,
@@ -114,7 +114,7 @@ impl DropboxClient for Client {
                         let mut _body = String::new();
                         res.read_to_string(&mut _body);
                         println!("{:?}", _body);
-                        let json: serde_json::Value = try!(serde_json::from_str(&_body));
+                        let json: json::Json = try!(json::decode(&_body));
                         println!("{:?}", json);
                         Err(ApiError::ClientError)
                     }

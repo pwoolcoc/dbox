@@ -40,11 +40,10 @@ fn main() {
 ----
 // compile with `cargo build --no-default-features`
 extern crate dropbox;
-extern crate serde;
+extern crate rustc_serialize as serialize;
 
 use dropbox::{DropboxClient, Result, Response};
 use dropbox::files;
-use serde::ser;
 
 struct MyClient;
 
@@ -54,7 +53,7 @@ impl DropboxClient for MyClient {
     }
 
     fn request<T>(&self, url: &str, headers: &mut BTreeMap<String, String>, body: &T) -> Result<Response>
-        where T: ser::Serialize
+        where T: serialize::Encodable
     {
         // implement http request here
     }

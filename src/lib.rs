@@ -18,16 +18,14 @@
 //!
 
 #[cfg(feature = "hyper-client")] extern crate hyper;
-extern crate serde;
-extern crate serde_json;
 extern crate chrono;
+extern crate rustc_serialize;
 
 #[cfg(test)] extern crate rand;
 
 use std::convert::From;
 use std::fmt;
 use std::collections::BTreeMap;
-use serde::ser;
 
 pub enum Endpoint {
     Api,
@@ -45,16 +43,17 @@ impl fmt::Display for Endpoint {
 
 pub trait DropboxClient {
     fn access_token(&self) -> &str;
-    fn request<T: Clone>(&self, endpoint: Endpoint, url: &str, headers: &mut BTreeMap<String, String>, body: Option<T>) -> Result<Response> where T: ser::Serialize;
+    fn request<T>(&self, endpoint: Endpoint, url: &str, headers: &mut BTreeMap<String, String>, body: Option<T>) -> Result<Response>
+            where T: rustc_serialize::Decodable;
 
-    fn api<T: Clone>(&self, url: &str, headers: &mut BTreeMap<String, String>, body: Option<T>) -> Result<Response>
-            where T: ser::Serialize
+    fn api<T>(&self, url: &str, headers: &mut BTreeMap<String, String>, body: Option<T>) -> Result<Response>
+            where T: rustc_serialize::Decodable
     {
         self.request(Endpoint::Api, url, headers, body)
     }
 
-    fn content<T: Clone>(&self, url: &str, headers: &mut BTreeMap<String, String>, body: Option<T>) -> Result<Response>
-            where T: ser::Serialize
+    fn content<T>(&self, url: &str, headers: &mut BTreeMap<String, String>, body: Option<T>) -> Result<Response>
+            where T: rustc_serialize::Decodable
     {
         self.request(Endpoint::Content, url, headers, body)
     }
@@ -101,12 +100,6 @@ pub enum ApiError {
     UploadSessionFinishError,
 }
 
-impl From<serde_json::error::Error> for ApiError {
-    fn from(err: serde_json::error::Error) -> ApiError {
-        ApiError::ClientError
-    }
-}
-
 #[derive(Debug, PartialEq, Clone)]
 pub struct Response {
     _status: u16,
@@ -140,7 +133,7 @@ mod tests {
     use std::str;
     use std::env;
     use std::default::Default;
-    use serde_json;
+    use rustc_serialize::json;
 
     const ACCESS_TOKEN: &'static str = "DROPBOX_TOKEN";
     const MALFORMED_TOKEN: &'static str = "asdf";
@@ -195,7 +188,7 @@ mod tests {
         assert!(files::copy_(&client, &random_path, &format!("/Test/{}/{}copy", now, random_filename)).is_ok());
 
         let (metadata, resp) = files::download(&client, &random_path).unwrap();
-        let body: serde_json::Value = serde_json::from_str(&resp.body()).unwrap();
+        let body: json::Json = json::decode(&resp.body()).unwrap();
         assert_eq!(&body.as_string().unwrap(), &random_contents);
 
         assert!(files::delete(&client, &format!("/Test/{}", now)).is_ok());

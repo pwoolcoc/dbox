@@ -3,8 +3,7 @@ use std::default::Default;
 use std::io;
 use std::fmt;
 use std::collections::BTreeMap;
-use serde_json;
-use serde_json::Value;
+use rustc_serialize::json;
 
 use structs::{FolderList, Metadata};
 
@@ -170,13 +169,13 @@ pub fn copy_<T>(client: &T, from: &str, to: &str) -> Result<Metadata>
                 where T: DropboxClient
 {
     let mut map = BTreeMap::new();
-    map.insert("from_path".to_string(), Value::String(from.to_string()));
-    map.insert("to_path".to_string(), Value::String(to.to_string()));
+    map.insert("from_path".to_string(), json::Json::String(from.to_string()));
+    map.insert("to_path".to_string(), json::Json::String(to.to_string()));
     let mut headers = BTreeMap::new();
     headers.insert("Content-Type".to_string(), "application/json".to_string());
     let resp = try!(client.api("files/copy", &mut headers, Some(&map)));
     println!("copy_: {:?}", resp.body());
-    let metadata: Metadata = serde_json::from_str(&resp.body()).unwrap();
+    let metadata: Metadata = json::decode(&resp.body()).unwrap();
     println!("{:?}", metadata);
     Ok(Default::default())
 }
@@ -185,7 +184,7 @@ pub fn create_folder<T>(client: &T, path: &str) -> Result<Metadata>
                 where T: DropboxClient
 {
     let mut map = BTreeMap::new();
-    map.insert("path".to_string(), Value::String(path.to_string()));
+    map.insert("path".to_string(), json::Json::String(path.to_string()));
     let mut headers = BTreeMap::new();
     headers.insert("Content-Type".to_string(), "application/json".to_string());
     let resp = client.api("files/create_folder", &mut headers, Some(&map));
@@ -198,9 +197,9 @@ pub fn delete<T: DropboxClient>(client: &T, path: &str) -> Result<Metadata> {
 
 pub fn download<T: DropboxClient>(client: &T, path: &str) -> Result<(Metadata, Response)> {
     let mut map = BTreeMap::new();
-    map.insert("path".to_string(), Value::String(path.to_string()));
+    map.insert("path".to_string(), json::Json::String(path.to_string()));
     let mut headers = BTreeMap::new();
-    headers.insert("Dropbox-API-Arg".to_string(), serde_json::to_string(&map).unwrap());
+    headers.insert("Dropbox-API-Arg".to_string(), json::encode(&map).unwrap());
     let resp = try!(client.content("files/download", &mut headers, None::<&str>));
     println!("{:?}", resp);
     Ok((
@@ -289,10 +288,10 @@ pub fn get_thumbnail_to_file_with_options<T>(client: &T, dest_path: &str, path: 
 
 pub fn list_folder<T: DropboxClient>(client: &T, path: &str) -> Result<FolderList> {
     let mut map = BTreeMap::new();
-    map.insert("path".to_string(), Value::String("/OpenBudget".to_string()));
-    map.insert("recursive".to_string(), Value::Bool(false));
-    map.insert("include_media_info".to_string(), Value::Bool(false));
-    map.insert("include_deleted".to_string(), Value::Bool(false));
+    map.insert("path".to_string(), json::Json::String("/OpenBudget".to_string()));
+    map.insert("recursive".to_string(), json::Json::Boolean(false));
+    map.insert("include_media_info".to_string(), json::Json::Bool(false));
+    map.insert("include_deleted".to_string(), json::Json::Bool(false));
     let mut headers = BTreeMap::new();
     headers.insert("Content-Type".to_string(), "application/json".to_string());
     match client.api("files/list_folder", &mut headers, Some(&map)) {
@@ -381,12 +380,12 @@ pub fn upload_with_options<T>(client: &T, contents: &str, path: &str, options: U
                 where T: DropboxClient
 {
     let mut map = BTreeMap::new();
-    map.insert("path", Value::String(path.to_string()));
-    map.insert("mode", Value::String(format!("{}", options.mode)));
-    map.insert("autorename", Value::Bool(options.autorename));
-    map.insert("mute", Value::Bool(options.mute));
+    map.insert("path", json::Json::String(path.to_string()));
+    map.insert("mode", json::Json::String(format!("{}", options.mode)));
+    map.insert("autorename", json::Json::Boolean(options.autorename));
+    map.insert("mute", json::Json::Boolean(options.mute));
     let mut headers = BTreeMap::new();
-    headers.insert("Dropbox-API-Arg".to_string(), serde_json::to_string(&map).unwrap());
+    headers.insert("Dropbox-API-Arg".to_string(), json::encode(&map).unwrap());
     headers.insert("Content-Type".to_string(), "application/octet-stream".to_string());
     let resp = client.content("files/upload", &mut headers, Some(&contents));
     Ok(Default::default())
