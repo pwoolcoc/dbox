@@ -8,7 +8,7 @@
 //! It uses [hyper](https://hyperium.github.io) for HTTP, though that part is swappable if you would
 //! like to use a different HTTP implementation.
 //!
-//! If you want to use hyper, just `use dropbox::client::Client`, as in the example below. If,
+//! If you want to use hyper, just `use dbox::client::Client`, as in the example below. If,
 //! however, you want to use something else, you will need to implement the `DropboxClient` trait
 //! for your data structure, build this crate with `--no-default-features`, and pass a reference to
 //! your client as the first parameter to the API functions.
@@ -19,8 +19,8 @@
 //! extern crate dbox;
 //!
 //! use std::env;
-//! use dropbox::client::Client;
-//! use dropbox::files;
+//! use dbox::client::Client;
+//! use dbox::files;
 //!
 //! let access_token = env::var("DROPBOX_TOKEN");
 //! let client = Client::new(access_token);

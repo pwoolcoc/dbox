@@ -171,8 +171,8 @@ pub struct UploadSessionCursor {
 ///
 /// ```ignore
 /// use std::env;
-/// use dropbox::client::Client;
-/// use dropbox::files;
+/// use dbox::client::Client;
+/// use dbox::files;
 ///
 /// let client = Client::new(env::var("DROPBOX_TOKEN"));
 /// let metadata = try!(files::copy_(&client, "/Path/to/existing/file", "/Path/to/new/file"));
@@ -195,8 +195,8 @@ pub fn copy_<T>(client: &T, from: &str, to: &str) -> Result<Metadata>
 ///
 /// ```ignore
 /// use std::env;
-/// use dropbox::client::Client;
-/// use dropbox::files;
+/// use dbox::client::Client;
+/// use dbox::files;
 ///
 /// let client = Client::new(env::var("DROPBOX_TOKEN"));
 /// let metadata = try!(files::create_folder(&client, "/Path/to/new/folder"));
@@ -223,8 +223,8 @@ pub fn delete<T: DropboxClient>(client: &T, path: &str) -> Result<Metadata> {
 ///
 /// ```ignore
 /// use std::env;
-/// use dropbox::client::Client;
-/// use dropbox::files;
+/// use dbox::client::Client;
+/// use dbox::files;
 ///
 /// let token = env::var("DROPBOX_TOKEN");
 /// let client = Client::new(token);

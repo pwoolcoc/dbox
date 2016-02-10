@@ -18,19 +18,14 @@ It is also very much lacking in tests and documentation.
 ----
 extern crate dbox;
 
-use dropbox::client::Client;
-use dropbox::files;
+use dbox::client::Client;
+use dbox::files;
 
 const ACCESS_TOKEN: &'static str = "MY_ACCESS_TOKEN";
 
 fn main() {
     let client = Client::new(ACCESS_TOKEN);
-    match files::list_folder(&client, "/foldername") {
-        Ok(folderlist) => {
-            // do something with folderlist
-        },
-        Err(e) => panic!(e),
-    }
+    let (metadata, response) = files::download(&client, "/path/to/file").unwrap();
 }
 ----
 
@@ -42,8 +37,8 @@ fn main() {
 extern crate dbox;
 extern crate rustc_serialize;
 
-use dropbox::{DropboxClient, Result, Response};
-use dropbox::files;
+use dbox::{DropboxClient, Result, Response};
+use dbox::files;
 
 struct MyClient;
 
@@ -61,12 +56,7 @@ impl DropboxClient for MyClient {
 
 fn main() {
     let client = MyClient;
-    match files::list_folder(&client, "/foldername") {
-        Ok(folderlist) => {
-            // do something with folderlist
-        },
-        Err(e) => panic!(e),
-    }
+    let (metadata, response) = files::download(&client, "/path/to/file").unwrap();
 }
 ----
 
