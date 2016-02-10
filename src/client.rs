@@ -70,13 +70,17 @@ impl DropboxClient for Client {
     }
 
     fn request<T>(&self, endpoint: Endpoint, url: &str, headers: &mut BTreeMap<String, String>, body: Option<T>) -> Result<Response>
-            where T: rustc_serialize::Decodable
+            where T: rustc_serialize::Encodable + Clone
     {
         let endpoint = format!("{}", endpoint);
         let url = format!("https://{}.dropboxapi.com/2/{}", endpoint, url);
         let sbody = {
-            let body = body.clone();
-            json::decode(&body).unwrap()
+            if body.is_some() {
+                let body = body.clone();
+                json::encode(&body.unwrap()).unwrap()
+            } else {
+                "".to_owned()
+            }
         };
 
         let mut hheaders = Headers::new();
@@ -104,9 +108,14 @@ impl DropboxClient for Client {
                         let mut _body = String::new();
                         res.read_to_string(&mut _body);
                         let status_raw = res.status_raw();
-                        let json: json::Json = try!(json::decode(&_body));
+                        let dropbox_result = res.headers.get_raw("dropbox-api-result");
+                        let dropbox_result = dropbox_result.map(|s| {
+                                String::from_utf8(s[0].clone()).unwrap()
+                        });
+                        // println!("Body: {:?}", &_body);
                         Ok(Response {
-                            _status: 200,
+                            _status: status_raw.0,
+                            _api_result: dropbox_result,
                             _body: _body,
                         })
                     },
@@ -114,8 +123,6 @@ impl DropboxClient for Client {
                         let mut _body = String::new();
                         res.read_to_string(&mut _body);
                         println!("{:?}", _body);
-                        let json: json::Json = try!(json::decode(&_body));
-                        println!("{:?}", json);
                         Err(ApiError::ClientError)
                     }
                 }

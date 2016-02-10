@@ -5,7 +5,7 @@ use std::fmt;
 use std::collections::BTreeMap;
 use rustc_serialize::json;
 
-use structs::{FolderList, Metadata};
+use structs::{FolderList, Metadata, FileMetadata};
 
 /// Instructs dropbox what to do when a conflict happens during upload
 #[derive(Debug, PartialEq, Clone)]
@@ -165,6 +165,18 @@ pub struct UploadSessionCursor {
 
 // Functions
 
+/// Copy a file
+///
+/// # Example
+///
+/// ```ignore
+/// use std::env;
+/// use dropbox::client::Client;
+/// use dropbox::files;
+///
+/// let client = Client::new(env::var("DROPBOX_TOKEN"));
+/// let metadata = try!(files::copy_(&client, "/Path/to/existing/file", "/Path/to/new/file"));
+/// ```
 pub fn copy_<T>(client: &T, from: &str, to: &str) -> Result<Metadata>
                 where T: DropboxClient
 {
@@ -174,12 +186,21 @@ pub fn copy_<T>(client: &T, from: &str, to: &str) -> Result<Metadata>
     let mut headers = BTreeMap::new();
     headers.insert("Content-Type".to_string(), "application/json".to_string());
     let resp = try!(client.api("files/copy", &mut headers, Some(&map)));
-    println!("copy_: {:?}", resp.body());
-    let metadata: Metadata = json::decode(&resp.body()).unwrap();
-    println!("{:?}", metadata);
-    Ok(Default::default())
+    json::decode(&resp.body()).map_err(|e| ApiError::from(e))
 }
 
+/// Create a folder
+///
+/// # Example
+///
+/// ```ignore
+/// use std::env;
+/// use dropbox::client::Client;
+/// use dropbox::files;
+///
+/// let client = Client::new(env::var("DROPBOX_TOKEN"));
+/// let metadata = try!(files::create_folder(&client, "/Path/to/new/folder"));
+/// ```
 pub fn create_folder<T>(client: &T, path: &str) -> Result<Metadata>
                 where T: DropboxClient
 {
@@ -187,27 +208,47 @@ pub fn create_folder<T>(client: &T, path: &str) -> Result<Metadata>
     map.insert("path".to_string(), json::Json::String(path.to_string()));
     let mut headers = BTreeMap::new();
     headers.insert("Content-Type".to_string(), "application/json".to_string());
-    let resp = client.api("files/create_folder", &mut headers, Some(&map));
-    Ok(Default::default())
+    let resp = try!(client.api("files/create_folder", &mut headers, Some(map)));
+    json::decode(&resp.body()).map_err(|e| ApiError::from(e))
 }
 
+/// TODO implement
 pub fn delete<T: DropboxClient>(client: &T, path: &str) -> Result<Metadata> {
     Ok(Default::default())
 }
 
-pub fn download<T: DropboxClient>(client: &T, path: &str) -> Result<(Metadata, Response)> {
+/// Download a file
+///
+/// # Example
+///
+/// ```ignore
+/// use std::env;
+/// use dropbox::client::Client;
+/// use dropbox::files;
+///
+/// let token = env::var("DROPBOX_TOKEN");
+/// let client = Client::new(token);
+/// let (metadata, response) = try!(files::download(&client, "/Path/to/file"));
+/// ```
+pub fn download<T: DropboxClient>(client: &T, path: &str) -> Result<(FileMetadata, Response)> {
     let mut map = BTreeMap::new();
     map.insert("path".to_string(), json::Json::String(path.to_string()));
     let mut headers = BTreeMap::new();
     headers.insert("Dropbox-API-Arg".to_string(), json::encode(&map).unwrap());
     let resp = try!(client.content("files/download", &mut headers, None::<&str>));
-    println!("{:?}", resp);
+    let metadata: FileMetadata = match resp._api_result {
+        Some(ref data) => {
+            try!(json::decode(data))
+        },
+        None => return Err(ApiError::ClientError)
+    };
     Ok((
-        Default::default(),
+        metadata,
         resp,
     ))
 }
 
+/// TODO implement
 pub fn download_to_file<T>(client: &T, dest_path: &str, path: &str) -> Result<(Metadata, Response)>
                 where T: DropboxClient
 {
@@ -215,17 +256,20 @@ pub fn download_to_file<T>(client: &T, dest_path: &str, path: &str) -> Result<(M
         Default::default(),
         Response {
             _status: 200,
+            _api_result: None,
             _body: "".to_string(),
         },
     ))
 }
 
+/// TODO implement
 pub fn get_metadata<T>(client: &T, path: &str, include_media_info: bool) -> Result<Metadata>
                 where T: DropboxClient
 {
     Ok(Default::default())
 }
 
+/// TODO implement
 pub fn get_preview<T>(client: &T, path: &str) -> Result<(Metadata, Response)>
                 where T: DropboxClient
 {
@@ -233,11 +277,13 @@ pub fn get_preview<T>(client: &T, path: &str) -> Result<(Metadata, Response)>
         Default::default(),
         Response {
             _status: 200,
+            _api_result: None,
             _body: "".to_string(),
         },
     ))
 }
 
+/// TODO implement
 pub fn get_preview_to_file<T>(client: &T, dest_path: &str, path: &str) -> Result<(Metadata, Response)>
                 where T: DropboxClient
 {
@@ -245,6 +291,7 @@ pub fn get_preview_to_file<T>(client: &T, dest_path: &str, path: &str) -> Result
         Default::default(),
         Response {
             _status: 200,
+            _api_result: None,
             _body: "".to_string(),
         },
     ))
@@ -256,6 +303,7 @@ pub fn get_thumbnail<T>(client: &T, path: &str) -> Result<(Metadata, Response)>
     get_thumbnail_with_options(client, path, Default::default())
 }
 
+/// TODO implement
 pub fn get_thumbnail_with_options<T>(client: &T, path: &str, options: ThumbnailOptions) -> Result<(Metadata, Response)>
                 where T: DropboxClient
 {
@@ -263,6 +311,7 @@ pub fn get_thumbnail_with_options<T>(client: &T, path: &str, options: ThumbnailO
         Default::default(),
         Response {
             _status: 200,
+            _api_result: None,
             _body: "".to_string(),
         },
     ))
@@ -274,6 +323,7 @@ pub fn get_thumbnail_to_file<T>(client: &T, dest_path: &str, path: &str) -> Resu
     get_thumbnail_to_file_with_options(client, dest_path, path, Default::default())
 }
 
+/// TODO implement
 pub fn get_thumbnail_to_file_with_options<T>(client: &T, dest_path: &str, path: &str, options: ThumbnailOptions) -> Result<(Metadata, Response)>
                 where T: DropboxClient
 {
@@ -281,17 +331,19 @@ pub fn get_thumbnail_to_file_with_options<T>(client: &T, dest_path: &str, path: 
         Default::default(),
         Response {
             _status: 200,
+            _api_result: None,
             _body: "".to_string(),
         },
     ))
 }
 
+/// TODO implement, need FolderList deser
 pub fn list_folder<T: DropboxClient>(client: &T, path: &str) -> Result<FolderList> {
     let mut map = BTreeMap::new();
     map.insert("path".to_string(), json::Json::String("/OpenBudget".to_string()));
     map.insert("recursive".to_string(), json::Json::Boolean(false));
-    map.insert("include_media_info".to_string(), json::Json::Bool(false));
-    map.insert("include_deleted".to_string(), json::Json::Bool(false));
+    map.insert("include_media_info".to_string(), json::Json::Boolean(false));
+    map.insert("include_deleted".to_string(), json::Json::Boolean(false));
     let mut headers = BTreeMap::new();
     headers.insert("Content-Type".to_string(), "application/json".to_string());
     match client.api("files/list_folder", &mut headers, Some(&map)) {
@@ -300,11 +352,13 @@ pub fn list_folder<T: DropboxClient>(client: &T, path: &str) -> Result<FolderLis
     }
 }
 
+/// TODO implement
 pub fn list_folder_continue<T>(client: &T, cursor: &str) -> Result<FolderList>
                 where T: DropboxClient
 {
     Ok(Default::default())
 }
+
 
 pub fn list_folder_get_latest_cursor<T>(client: &T, path: &str) -> Result<String>
                 where T: DropboxClient
@@ -312,12 +366,14 @@ pub fn list_folder_get_latest_cursor<T>(client: &T, path: &str) -> Result<String
     list_folder_get_latest_cursor_with_options(client, path, Default::default())
 }
 
+/// TODO implement
 pub fn list_folder_get_latest_cursor_with_options<T>(client: &T, path: &str, options: GetCursorOptions) -> Result<String>
                 where T: DropboxClient
 {
     Ok("".to_string())
 }
 
+/// TODO implement
 pub fn list_folder_longpoll<T>(client: &T, cursor: &str, timeout: usize) -> Result<FolderListLongpoll>
                 where T: DropboxClient
 {
@@ -327,6 +383,7 @@ pub fn list_folder_longpoll<T>(client: &T, cursor: &str, timeout: usize) -> Resu
     })
 }
 
+/// TODO implement
 pub fn list_revisions<T>(client: &T, path: &str, limit: usize) -> Result<ListRevisions>
                 where T: DropboxClient
 {
@@ -336,18 +393,21 @@ pub fn list_revisions<T>(client: &T, path: &str, limit: usize) -> Result<ListRev
     })
 }
 
+/// TODO implement
 pub fn move_<T>(client: &T, from: &str, to: &str) -> Result<Metadata>
                 where T: DropboxClient
 {
     Ok(Default::default())
 }
 
+/// TODO implement
 pub fn permanently_delete<T>(client: &T, path: &str) -> Result<()>
                 where T: DropboxClient
 {
     Ok(())
 }
 
+/// TODO implement
 pub fn restore<T>(client: &T, path: &str, rev: &str) -> Result<Metadata>
                 where T: DropboxClient
 {
@@ -360,6 +420,7 @@ pub fn search<T>(client: &T, path: &str, query: &str) -> Result<Search>
     search_with_options(client, path, query, Default::default())
 }
 
+/// TODO implement
 pub fn search_with_options<T>(client: &T, path: &str, query: &str, options: SearchOptions) -> Result<Search>
                 where T: DropboxClient
 {
@@ -376,6 +437,7 @@ pub fn upload<T>(client: &T, contents: &str, path: &str) -> Result<Metadata>
     upload_with_options(client, contents, path, Default::default())
 }
 
+/// TODO implement
 pub fn upload_with_options<T>(client: &T, contents: &str, path: &str, options: UploadOptions) -> Result<Metadata>
                 where T: DropboxClient
 {
@@ -387,16 +449,18 @@ pub fn upload_with_options<T>(client: &T, contents: &str, path: &str, options: U
     let mut headers = BTreeMap::new();
     headers.insert("Dropbox-API-Arg".to_string(), json::encode(&map).unwrap());
     headers.insert("Content-Type".to_string(), "application/octet-stream".to_string());
-    let resp = client.content("files/upload", &mut headers, Some(&contents));
+    let resp = client.content("files/upload", &mut headers, Some(contents.to_owned()));
     Ok(Default::default())
 }
 
+/// TODO implement
 pub fn upload_session_append<T, U>(client: &T, f: U, session_id: &str, offset: usize) -> Result<()>
                 where T: DropboxClient, U: io::Read
 {
     Ok(())
 }
 
+/// TODO implement
 pub fn upload_session_finish<T, U>(client: &T, f: U, cursor: &UploadSessionCursor, commit: &CommitInfo) -> Result<Metadata>
                 where T: DropboxClient,
                       U: io::Read
@@ -404,6 +468,7 @@ pub fn upload_session_finish<T, U>(client: &T, f: U, cursor: &UploadSessionCurso
     Ok(Default::default())
 }
 
+/// TODO implement
 pub fn upload_session_start<T, U>(client: &T, f: U) -> Result<String>
                 where T: DropboxClient,
                       U: io::Read

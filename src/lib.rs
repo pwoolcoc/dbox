@@ -4,16 +4,27 @@
 
 //! Dropbox SDK for Rust
 //!
+//! This crate implements a simple client for the [Dropbox API](https://dropbox.com/developers).
+//! It uses [hyper](https://hyperium.github.io) for HTTP, though that part is swappable if you would
+//! like to use a different HTTP implementation.
+//!
+//! If you want to use hyper, just `use dropbox::client::Client`, as in the example below. If,
+//! however, you want to use something else, you will need to implement the `DropboxClient` trait
+//! for your data structure, build this crate with `--no-default-features`, and pass a reference to
+//! your client as the first parameter to the API functions.
+//!
 //! # Example
 //!
 //! ```ignore
 //! extern crate dropbox;
 //!
+//! use std::env;
 //! use dropbox::client::Client;
 //! use dropbox::files;
 //!
-//! let client = Client::new(ACCESS_TOKEN);
-//! let folder_list = files::list_folder(&client, "/path/to/folder");
+//! let access_token = env::var("DROPBOX_TOKEN");
+//! let client = Client::new(access_token);
+//! let folder_list = files::copy_(&client, "/path/to/existing/file", "/path/to/new/file");
 //! ```
 //!
 
@@ -27,6 +38,7 @@ use std::convert::From;
 use std::fmt;
 use std::collections::BTreeMap;
 
+#[doc(hidden)]
 pub enum Endpoint {
     Api,
     Content,
@@ -44,21 +56,22 @@ impl fmt::Display for Endpoint {
 pub trait DropboxClient {
     fn access_token(&self) -> &str;
     fn request<T>(&self, endpoint: Endpoint, url: &str, headers: &mut BTreeMap<String, String>, body: Option<T>) -> Result<Response>
-            where T: rustc_serialize::Decodable;
+            where T: rustc_serialize::Encodable + Clone;
 
     fn api<T>(&self, url: &str, headers: &mut BTreeMap<String, String>, body: Option<T>) -> Result<Response>
-            where T: rustc_serialize::Decodable
+            where T: rustc_serialize::Encodable + Clone
     {
         self.request(Endpoint::Api, url, headers, body)
     }
 
     fn content<T>(&self, url: &str, headers: &mut BTreeMap<String, String>, body: Option<T>) -> Result<Response>
-            where T: rustc_serialize::Decodable
+            where T: rustc_serialize::Encodable + Clone
     {
         self.request(Endpoint::Content, url, headers, body)
     }
 }
 
+/// Collection of possible errors
 #[derive(Debug, PartialEq, Clone)]
 pub enum ApiError {
     AddFolderMemberError,
@@ -100,9 +113,19 @@ pub enum ApiError {
     UploadSessionFinishError,
 }
 
+impl From<rustc_serialize::json::DecoderError> for ApiError {
+    fn from(e: rustc_serialize::json::DecoderError) -> ApiError {
+        ApiError::ClientError
+    }
+}
+
+/// Simple abstraction of a HTTP response, to allow the HTTP client to be pluggable
+/// 
+/// TODO: overhaul this
 #[derive(Debug, PartialEq, Clone)]
 pub struct Response {
     _status: u16,
+    _api_result: Option<String>,
     _body: String,
 }
 
@@ -117,10 +140,16 @@ impl Response {
 
 pub type Result<T> = ::std::result::Result<T, ApiError>;
 
-#[cfg(feature = "hyper-client")] pub mod client;
+#[cfg(feature = "hyper-client")]
+/// Default implementation of the Dropbox Client
+pub mod client;
+/// Module for performing operations on files in a dropbox account
 pub mod files;
+/// Module that holds definitions for dropbox data structures
 pub mod structs;
+/// TODO
 pub mod sharing;
+/// TODO
 pub mod users;
 
 #[cfg(test)]
@@ -187,9 +216,10 @@ mod tests {
 
         assert!(files::copy_(&client, &random_path, &format!("/Test/{}/{}copy", now, random_filename)).is_ok());
 
+        println!("About to download file");
         let (metadata, resp) = files::download(&client, &random_path).unwrap();
-        let body: json::Json = json::decode(&resp.body()).unwrap();
-        assert_eq!(&body.as_string().unwrap(), &random_contents);
+        let body: String = json::decode(&resp.body()).unwrap();
+        assert_eq!(&body, &random_contents);
 
         assert!(files::delete(&client, &format!("/Test/{}", now)).is_ok());
     }
