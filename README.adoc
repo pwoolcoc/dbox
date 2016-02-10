@@ -16,7 +16,7 @@ It is also very much lacking in tests and documentation.
 [source,rust]
 .Basic example
 ----
-extern crate dropbox;
+extern crate dbox;
 
 use dropbox::client::Client;
 use dropbox::files;
@@ -39,8 +39,8 @@ fn main() {
 .With non-Hyper client
 ----
 // compile with `cargo build --no-default-features`
-extern crate dropbox;
-extern crate rustc_serialize as serialize;
+extern crate dbox;
+extern crate rustc_serialize;
 
 use dropbox::{DropboxClient, Result, Response};
 use dropbox::files;
@@ -53,7 +53,7 @@ impl DropboxClient for MyClient {
     }
 
     fn request<T>(&self, url: &str, headers: &mut BTreeMap<String, String>, body: &T) -> Result<Response>
-        where T: serialize::Encodable
+        where T: rustc_serialize::Encodable + Clone
     {
         // implement http request here
     }

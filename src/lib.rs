@@ -16,7 +16,7 @@
 //! # Example
 //!
 //! ```ignore
-//! extern crate dropbox;
+//! extern crate dbox;
 //!
 //! use std::env;
 //! use dropbox::client::Client;
