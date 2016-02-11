@@ -209,9 +209,6 @@ pub fn create_folder<T>(client: &T, path: &str) -> Result<NewFolder>
     let mut headers = BTreeMap::new();
     headers.insert("Content-Type".to_string(), "application/json".to_string());
     let resp = try!(client.api("files/create_folder", &mut headers, Some(map)));
-    {
-        println!("create folder: {:?}", &resp.body);
-    }
     json::decode(&resp.body).map_err(|e| ApiError::from(e))
 }
 
