@@ -458,13 +458,41 @@ pub fn search_with_options<T>(client: &T, path: &str, query: &str, options: Sear
     })
 }
 
+/// Upload a file to the user's dropbox acconut
+/// 
+/// # Example
+///
+/// ```ignore
+/// use std::env;
+/// use dbox::client::Client;
+/// use dbox::files;
+///
+/// let client = Client::new(env::var("DROPBOX_TOKEN"));
+/// let metadata = try!(files::upload(&client, "file contents", "/path/to/file"));
+/// ```
+///
+/// TODO error handling
 pub fn upload<T>(client: &T, contents: &str, path: &str) -> Result<FileMetadata>
                 where T: DropboxClient
 {
     upload_with_options(client, contents, path, Default::default())
 }
 
-/// TODO implement
+/// Upload a file to the user's dropbox acconut
+/// 
+/// # Example
+///
+/// ```ignore
+/// use std::env;
+/// use dbox::client::Client;
+/// use dbox::files;
+///
+/// let client = Client::new(env::var("DROPBOX_TOKEN"));
+/// let upload_options = UploadOptions { mode: WriteMode::Overwrite, autorename: true, mute: false };
+/// let metadata = try!(files::upload_with_options(&client, "file contents", "/path/to/file", upload_options));
+/// ```
+///
+/// TODO error handling
 pub fn upload_with_options<T>(client: &T, contents: &str, path: &str, options: UploadOptions) -> Result<FileMetadata>
                 where T: DropboxClient
 {
