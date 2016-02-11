@@ -165,10 +165,10 @@ unshare_folder	./src/sharing.rs	/^pub fn unshare_folder<T>(client: &T, shared_fo
 update_folder_member	./src/sharing.rs	/^pub fn update_folder_member<T>(client: &T,$/;"	f
 update_folder_policy	./src/sharing.rs	/^pub fn update_folder_policy<T>(client: &T, shared_folder_id: &str) -> Result<Metadata>$/;"	f
 update_folder_policy_with_options	./src/sharing.rs	/^pub fn update_folder_policy_with_options<T>(client: &T, shared_folder_id: &str, options: UpdateFolderPolicyOptions) -> Result<Metadata>$/;"	f
-upload	./src/files.rs	/^pub fn upload<T>(client: &T, contents: &str, path: &str) -> Result<Metadata>$/;"	f
+upload	./src/files.rs	/^pub fn upload<T>(client: &T, contents: &str, path: &str) -> Result<FileMetadata>$/;"	f
 upload_session_append	./src/files.rs	/^pub fn upload_session_append<T, U>(client: &T, f: U, session_id: &str, offset: usize) -> Result<()>$/;"	f
 upload_session_finish	./src/files.rs	/^pub fn upload_session_finish<T, U>(client: &T, f: U, cursor: &UploadSessionCursor, commit: &CommitInfo) -> Result<Metadata>$/;"	f
 upload_session_start	./src/files.rs	/^pub fn upload_session_start<T, U>(client: &T, f: U) -> Result<String>$/;"	f
-upload_with_options	./src/files.rs	/^pub fn upload_with_options<T>(client: &T, contents: &str, path: &str, options: UploadOptions) -> Result<Metadata>$/;"	f
+upload_with_options	./src/files.rs	/^pub fn upload_with_options<T>(client: &T, contents: &str, path: &str, options: UploadOptions) -> Result<FileMetadata>$/;"	f
 user_agent	./src/client.rs	/^    pub fn user_agent(self, user_agent: &str) -> Client {$/;"	f
 users	./src/lib.rs	/^pub mod users;$/;"	m
