@@ -212,7 +212,19 @@ pub fn create_folder<T>(client: &T, path: &str) -> Result<NewFolder>
     json::decode(&resp.body).map_err(|e| ApiError::from(e))
 }
 
-/// TODO implement
+/// Delete a file or folder from the user's dropbox acconut
+///
+/// # Example
+///
+/// ```ignore
+/// use std::env;
+/// use dbox::client::Client;
+/// use dbox::files;
+///
+/// let client = Client::new(env::var("DROPBOX_TOKEN"));
+/// let deleted = files::delete(&client, "/path/to/file/or/folder");
+/// ```
+/// TODO error handling
 pub fn delete<T: DropboxClient>(client: &T, path: &str) -> Result<Metadata> {
     let mut map = BTreeMap::new();
     map.insert("path".to_string(), json::Json::String(path.to_string()));
@@ -342,6 +354,18 @@ pub fn get_thumbnail_to_file_with_options<T>(client: &T, dest_path: &str, path: 
     ))
 }
 
+/// List the entries in a user's dropbox folder
+///
+/// # Example
+///
+/// ```ignore
+/// use std::env;
+/// use dbox::client::Client;
+/// use dbox::files;
+///
+/// let client = Client::new(env::var("DROPBOX_TOKEN"));
+/// let folderlist = files::list_folder(&client, "/path/to/folder");
+/// ```
 /// TODO error handling
 pub fn list_folder<T: DropboxClient>(client: &T, path: &str) -> Result<FolderList> {
     let mut map = BTreeMap::new();
