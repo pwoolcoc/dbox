@@ -5,7 +5,7 @@ use std::fmt;
 use std::collections::BTreeMap;
 use rustc_serialize::json;
 
-use structs::{FolderList, Metadata, FileMetadata};
+use structs::{FolderList, Metadata, FileMetadata, NewFolder};
 
 /// Instructs dropbox what to do when a conflict happens during upload
 #[derive(Debug, PartialEq, Clone)]
@@ -201,7 +201,7 @@ pub fn copy_<T>(client: &T, from: &str, to: &str) -> Result<Metadata>
 /// let client = Client::new(env::var("DROPBOX_TOKEN"));
 /// let metadata = try!(files::create_folder(&client, "/Path/to/new/folder"));
 /// ```
-pub fn create_folder<T>(client: &T, path: &str) -> Result<Metadata>
+pub fn create_folder<T>(client: &T, path: &str) -> Result<NewFolder>
                 where T: DropboxClient
 {
     let mut map = BTreeMap::new();

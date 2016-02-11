@@ -129,9 +129,15 @@ impl Default for FolderList {
     }
 }
 
+#[derive(PartialEq, Debug, Clone, RustcEncodable, RustcDecodable)]
+pub struct NewFolder {
+    name: String,
+    path_lower: String,
+    id: String,
+}
+
 #[derive(RustcEncodable, RustcDecodable, Debug, PartialEq, Clone)]
 pub struct SharingInfo {
     read_only: bool,
     parent_shared_folder_id: String,
 }
-
