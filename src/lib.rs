@@ -120,22 +120,13 @@ impl From<rustc_serialize::json::DecoderError> for ApiError {
 }
 
 /// Simple abstraction of a HTTP response, to allow the HTTP client to be pluggable
-/// 
+///
 /// TODO: overhaul this
 #[derive(Debug, PartialEq, Clone)]
 pub struct Response {
-    _status: u16,
-    _api_result: Option<String>,
-    _body: String,
-}
-
-impl Response {
-    pub fn status(&self) -> u16 {
-        self._status
-    }
-    pub fn body(&self) -> String {
-        self._body.clone()
-    }
+    pub status: u16,
+    pub api_result: Option<String>,
+    pub body: String,
 }
 
 pub type Result<T> = ::std::result::Result<T, ApiError>;
@@ -218,7 +209,7 @@ mod tests {
 
         println!("About to download file");
         let (metadata, resp) = files::download(&client, &random_path).unwrap();
-        let body: String = json::decode(&resp.body()).unwrap();
+        let body: String = json::decode(&resp.body).unwrap();
         assert_eq!(&body, &random_contents);
 
         assert!(files::delete(&client, &format!("/Test/{}", now)).is_ok());

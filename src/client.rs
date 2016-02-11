@@ -64,6 +64,24 @@ impl Client {
     }
 }
 
+impl From<hyper_client::response::Response> for Response {
+    fn from(res: hyper_client::response::Response) -> Response {
+        let mut res = res;
+        let mut body = String::new();
+        res.read_to_string(&mut body);
+        let status_raw = res.status_raw();
+        let api_result = res.headers.get_raw("dropbox-api-result");
+        let api_result = api_result.map(|s| {
+                String::from_utf8(s[0].clone()).unwrap()
+        });
+        Response {
+            status: status_raw.0,
+            api_result: api_result,
+            body: body,
+        }
+    }
+}
+
 impl DropboxClient for Client {
     fn access_token(&self) -> &str {
         self.token.as_ref()
@@ -105,19 +123,7 @@ impl DropboxClient for Client {
             Ok(mut res) => {
                 match res.status {
                     StatusCode::Ok => {
-                        let mut _body = String::new();
-                        res.read_to_string(&mut _body);
-                        let status_raw = res.status_raw();
-                        let dropbox_result = res.headers.get_raw("dropbox-api-result");
-                        let dropbox_result = dropbox_result.map(|s| {
-                                String::from_utf8(s[0].clone()).unwrap()
-                        });
-                        // println!("Body: {:?}", &_body);
-                        Ok(Response {
-                            _status: status_raw.0,
-                            _api_result: dropbox_result,
-                            _body: _body,
-                        })
+                        Ok(From::from(res))
                     },
                     _ => {
                         let mut _body = String::new();

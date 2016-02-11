@@ -186,7 +186,7 @@ pub fn copy_<T>(client: &T, from: &str, to: &str) -> Result<Metadata>
     let mut headers = BTreeMap::new();
     headers.insert("Content-Type".to_string(), "application/json".to_string());
     let resp = try!(client.api("files/copy", &mut headers, Some(&map)));
-    json::decode(&resp.body()).map_err(|e| ApiError::from(e))
+    json::decode(&resp.body).map_err(|e| ApiError::from(e))
 }
 
 /// Create a folder
@@ -209,7 +209,7 @@ pub fn create_folder<T>(client: &T, path: &str) -> Result<Metadata>
     let mut headers = BTreeMap::new();
     headers.insert("Content-Type".to_string(), "application/json".to_string());
     let resp = try!(client.api("files/create_folder", &mut headers, Some(map)));
-    json::decode(&resp.body()).map_err(|e| ApiError::from(e))
+    json::decode(&resp.body).map_err(|e| ApiError::from(e))
 }
 
 /// TODO implement
@@ -236,7 +236,7 @@ pub fn download<T: DropboxClient>(client: &T, path: &str) -> Result<(FileMetadat
     let mut headers = BTreeMap::new();
     headers.insert("Dropbox-API-Arg".to_string(), json::encode(&map).unwrap());
     let resp = try!(client.content("files/download", &mut headers, None::<&str>));
-    let metadata: FileMetadata = match resp._api_result {
+    let metadata: FileMetadata = match resp.api_result {
         Some(ref data) => {
             try!(json::decode(data))
         },
@@ -255,9 +255,9 @@ pub fn download_to_file<T>(client: &T, dest_path: &str, path: &str) -> Result<(M
     Ok((
         Default::default(),
         Response {
-            _status: 200,
-            _api_result: None,
-            _body: "".to_string(),
+            status: 200,
+            api_result: None,
+            body: "".to_string(),
         },
     ))
 }
@@ -276,9 +276,9 @@ pub fn get_preview<T>(client: &T, path: &str) -> Result<(Metadata, Response)>
     Ok((
         Default::default(),
         Response {
-            _status: 200,
-            _api_result: None,
-            _body: "".to_string(),
+            status: 200,
+            api_result: None,
+            body: "".to_string(),
         },
     ))
 }
@@ -290,9 +290,9 @@ pub fn get_preview_to_file<T>(client: &T, dest_path: &str, path: &str) -> Result
     Ok((
         Default::default(),
         Response {
-            _status: 200,
-            _api_result: None,
-            _body: "".to_string(),
+            status: 200,
+            api_result: None,
+            body: "".to_string(),
         },
     ))
 }
@@ -310,9 +310,9 @@ pub fn get_thumbnail_with_options<T>(client: &T, path: &str, options: ThumbnailO
     Ok((
         Default::default(),
         Response {
-            _status: 200,
-            _api_result: None,
-            _body: "".to_string(),
+            status: 200,
+            api_result: None,
+            body: "".to_string(),
         },
     ))
 }
@@ -330,9 +330,9 @@ pub fn get_thumbnail_to_file_with_options<T>(client: &T, dest_path: &str, path: 
     Ok((
         Default::default(),
         Response {
-            _status: 200,
-            _api_result: None,
-            _body: "".to_string(),
+            status: 200,
+            api_result: None,
+            body: "".to_string(),
         },
     ))
 }
