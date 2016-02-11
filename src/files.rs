@@ -1,6 +1,6 @@
 use super::{Result, Response, DropboxClient, ApiError};
 use std::default::Default;
-use std::io;
+use std::io::{self, Write, Read};
 use std::fmt;
 use std::collections::BTreeMap;
 use rustc_serialize::json;
@@ -276,6 +276,20 @@ pub fn download_to_file<T>(client: &T, dest_path: &str, path: &str) -> Result<(M
             api_result: None,
             body: "".to_string(),
         },
+    ))
+}
+
+pub fn download_to<T, U>(client: &T, path: &str, writer: U) -> Result<(Metadata, Response)>
+                where T: DropboxClient,
+                      U: Write
+{
+    Ok((
+            Default::default(),
+            Response {
+                status: 200,
+                api_result: None,
+                body: "".to_string(),
+            }
     ))
 }
 
