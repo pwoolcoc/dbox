@@ -1,0 +1,174 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+AccessLevel	./src/sharing.rs	/^pub enum AccessLevel {$/;"	g
+AclUpdatePolicy	./src/sharing.rs	/^pub enum AclUpdatePolicy {$/;"	g
+AddFolderMemberOptions	./src/sharing.rs	/^pub struct AddFolderMemberOptions {$/;"	s
+ApiError	./src/lib.rs	/^pub enum ApiError {$/;"	g
+BasicAccount	./src/users.rs	/^pub struct BasicAccount {$/;"	s
+Client	./src/client.rs	/^impl Client {$/;"	i
+Client	./src/client.rs	/^pub struct Client {$/;"	s
+CommitInfo	./src/files.rs	/^pub struct CommitInfo {$/;"	s
+CreateSharedLinkOptions	./src/sharing.rs	/^pub struct CreateSharedLinkOptions {$/;"	s
+Decodable for Metadata	./src/structs.rs	/^impl Decodable for Metadata {$/;"	i
+Decodable for Tag	./src/structs.rs	/^impl Decodable for Tag {$/;"	i
+Default for AddFolderMemberOptions	./src/sharing.rs	/^impl Default for AddFolderMemberOptions {$/;"	i
+Default for CreateSharedLinkOptions	./src/sharing.rs	/^impl Default for CreateSharedLinkOptions {$/;"	i
+Default for FileMetadata	./src/structs.rs	/^impl Default for FileMetadata {$/;"	i
+Default for FolderList	./src/structs.rs	/^impl Default for FolderList {$/;"	i
+Default for GetCursorOptions	./src/files.rs	/^impl Default for GetCursorOptions {$/;"	i
+Default for Metadata	./src/structs.rs	/^impl Default for Metadata {$/;"	i
+Default for SearchOptions	./src/files.rs	/^impl Default for SearchOptions {$/;"	i
+Default for ShareFolderOptions	./src/sharing.rs	/^impl Default for ShareFolderOptions {$/;"	i
+Default for ThumbnailOptions	./src/files.rs	/^impl Default for ThumbnailOptions {$/;"	i
+Default for UpdateFolderPolicyOptions	./src/sharing.rs	/^impl Default for UpdateFolderPolicyOptions {$/;"	i
+Default for UploadOptions	./src/files.rs	/^impl Default for UploadOptions {$/;"	i
+DropboxClient	./src/lib.rs	/^pub trait DropboxClient {$/;"	t
+DropboxClient for Client	./src/client.rs	/^impl DropboxClient for Client {$/;"	i
+Encodable for Tag	./src/structs.rs	/^impl Encodable for Tag {$/;"	i
+Endpoint	./src/lib.rs	/^pub enum Endpoint {$/;"	g
+FileMetadata	./src/structs.rs	/^pub struct FileMetadata {$/;"	s
+FolderList	./src/structs.rs	/^pub struct FolderList {$/;"	s
+FolderListLongpoll	./src/files.rs	/^pub struct FolderListLongpoll {$/;"	s
+From for ApiError	./src/lib.rs	/^impl From<rustc_serialize::json::DecoderError> for ApiError {$/;"	i
+From for Response	./src/client.rs	/^impl From<hyper_client::response::Response> for Response {$/;"	i
+FullAccount	./src/users.rs	/^pub struct FullAccount {$/;"	s
+GetCursorOptions	./src/files.rs	/^pub struct GetCursorOptions {$/;"	s
+GroupInfo	./src/sharing.rs	/^pub struct GroupInfo {$/;"	s
+GroupMembershipInfo	./src/sharing.rs	/^pub struct GroupMembershipInfo {$/;"	s
+InviteeInfo	./src/sharing.rs	/^pub enum InviteeInfo {$/;"	g
+InviteeMembershipInfo	./src/sharing.rs	/^pub struct InviteeMembershipInfo {$/;"	s
+JobError	./src/sharing.rs	/^pub enum JobError {$/;"	g
+JobStatus	./src/sharing.rs	/^pub enum JobStatus {$/;"	g
+ListRevisions	./src/files.rs	/^pub struct ListRevisions {$/;"	s
+MemberPolicy	./src/sharing.rs	/^pub enum MemberPolicy {$/;"	g
+MemberSelector	./src/sharing.rs	/^pub enum MemberSelector {$/;"	g
+Metadata	./src/structs.rs	/^pub struct Metadata {$/;"	s
+NewFolder	./src/structs.rs	/^pub struct NewFolder {$/;"	s
+PendingUploadMode	./src/sharing.rs	/^pub enum PendingUploadMode {$/;"	g
+Response	./src/lib.rs	/^pub struct Response {$/;"	s
+Result	./src/lib.rs	/^pub type Result<T> = ::std::result::Result<T, ApiError>;$/;"	T
+Search	./src/files.rs	/^pub struct Search {$/;"	s
+SearchMatch	./src/files.rs	/^pub struct SearchMatch {$/;"	s
+SearchMatchType	./src/files.rs	/^pub enum SearchMatchType {$/;"	g
+SearchMode	./src/files.rs	/^pub enum SearchMode {$/;"	g
+SearchOptions	./src/files.rs	/^pub struct SearchOptions {$/;"	s
+ShareFolderError	./src/sharing.rs	/^pub enum ShareFolderError {$/;"	g
+ShareFolderJobStatus	./src/sharing.rs	/^pub enum ShareFolderJobStatus {$/;"	g
+ShareFolderLaunch	./src/sharing.rs	/^pub enum ShareFolderLaunch {$/;"	g
+ShareFolderOptions	./src/sharing.rs	/^pub struct ShareFolderOptions {$/;"	s
+SharePathError	./src/sharing.rs	/^pub enum SharePathError {$/;"	g
+SharedFolderMembers	./src/sharing.rs	/^pub struct SharedFolderMembers {$/;"	s
+SharedLinkPolicy	./src/sharing.rs	/^pub enum SharedLinkPolicy {$/;"	g
+SharingInfo	./src/structs.rs	/^pub struct SharingInfo {$/;"	s
+SpaceUsage	./src/users.rs	/^pub struct SpaceUsage {$/;"	s
+Tag	./src/structs.rs	/^pub enum Tag {$/;"	g
+ThumbnailFormat	./src/files.rs	/^pub enum ThumbnailFormat {$/;"	g
+ThumbnailOptions	./src/files.rs	/^pub struct ThumbnailOptions {$/;"	s
+ThumbnailSize	./src/files.rs	/^pub enum ThumbnailSize {$/;"	g
+UpdateFolderPolicyOptions	./src/sharing.rs	/^pub struct UpdateFolderPolicyOptions {$/;"	s
+UploadOptions	./src/files.rs	/^pub struct UploadOptions {$/;"	s
+UploadSessionCursor	./src/files.rs	/^pub struct UploadSessionCursor {$/;"	s
+UserInfo	./src/sharing.rs	/^pub struct UserInfo {$/;"	s
+UserMembershipInfo	./src/sharing.rs	/^pub struct UserMembershipInfo {$/;"	s
+WriteMode	./src/files.rs	/^pub enum WriteMode {$/;"	g
+access_token	./src/client.rs	/^    fn access_token(&self) -> &str {$/;"	f
+access_token	./src/lib.rs	/^    fn access_token(&self) -> &str;$/;"	f
+add_folder_member	./src/sharing.rs	/^pub fn add_folder_member<T, U>(client: &T, shared_folder_id: &str, members: &[U]) -> Result<()>$/;"	f
+add_folder_member_with_options	./src/sharing.rs	/^pub fn add_folder_member_with_options<T, U>(client: &T, shared_folder_id: &str, members: &[U], options: AddFolderMemberOptions) -> Result<()>$/;"	f
+api	./src/lib.rs	/^    fn api<T>(&self, url: &str, headers: &mut BTreeMap<String, String>, body: Option<T>) -> Result<Response>$/;"	f
+check_job_status	./src/sharing.rs	/^pub fn check_job_status<T>(client: &T, async_job_id: &str) -> Result<JobStatus>$/;"	f
+check_share_job_status	./src/sharing.rs	/^pub fn check_share_job_status<T>(client: &T, async_job_id: &str) -> Result<ShareFolderJobStatus>$/;"	f
+client	./src/lib.rs	/^pub mod client;$/;"	m
+content	./src/lib.rs	/^    fn content<T>(&self, url: &str, headers: &mut BTreeMap<String, String>, body: Option<T>) -> Result<Response>$/;"	f
+copy_	./src/files.rs	/^pub fn copy_<T>(client: &T, from: &str, to: &str) -> Result<Metadata>$/;"	f
+create_folder	./src/files.rs	/^pub fn create_folder<T>(client: &T, path: &str) -> Result<NewFolder>$/;"	f
+create_shared_link	./src/sharing.rs	/^pub fn create_shared_link<T>(client: &T, path: &str) -> Result<Metadata>$/;"	f
+create_shared_link_with_options	./src/sharing.rs	/^pub fn create_shared_link_with_options<T>(client: &T, path: &str, options: CreateSharedLinkOptions) -> Result<Metadata>$/;"	f
+decode	./src/structs.rs	/^    fn decode<D: Decoder>(decoder: &mut D) -> Result<Metadata, D::Error> {$/;"	f
+decode	./src/structs.rs	/^    fn decode<D: Decoder>(decoder: &mut D) -> Result<Tag, D::Error> {$/;"	f
+default	./src/files.rs	/^    fn default() -> GetCursorOptions {$/;"	f
+default	./src/files.rs	/^    fn default() -> SearchOptions {$/;"	f
+default	./src/files.rs	/^    fn default() -> ThumbnailOptions {$/;"	f
+default	./src/files.rs	/^    fn default() -> UploadOptions {$/;"	f
+default	./src/sharing.rs	/^    fn default() -> AddFolderMemberOptions {$/;"	f
+default	./src/sharing.rs	/^    fn default() -> CreateSharedLinkOptions {$/;"	f
+default	./src/sharing.rs	/^    fn default() -> ShareFolderOptions {$/;"	f
+default	./src/sharing.rs	/^    fn default() -> UpdateFolderPolicyOptions {$/;"	f
+default	./src/structs.rs	/^    fn default() -> FileMetadata {$/;"	f
+default	./src/structs.rs	/^    fn default() -> FolderList {$/;"	f
+default	./src/structs.rs	/^    fn default() -> Metadata {$/;"	f
+delete	./src/files.rs	/^pub fn delete<T: DropboxClient>(client: &T, path: &str) -> Result<Metadata> {$/;"	f
+download	./src/files.rs	/^pub fn download<T: DropboxClient>(client: &T, path: &str) -> Result<(FileMetadata, Response)> {$/;"	f
+download_to_file	./src/files.rs	/^pub fn download_to_file<T>(client: &T, dest_path: &str, path: &str) -> Result<(Metadata, Response)>$/;"	f
+encode	./src/structs.rs	/^    fn encode<S: Encoder>(&self, encoder: &mut S) -> Result<(), S::Error> {$/;"	f
+files	./src/lib.rs	/^pub mod files;$/;"	m
+fmt	./src/files.rs	/^    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {$/;"	f
+fmt	./src/lib.rs	/^    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {$/;"	f
+fmt::Display for Endpoint	./src/lib.rs	/^impl fmt::Display for Endpoint {$/;"	i
+fmt::Display for WriteMode	./src/files.rs	/^impl fmt::Display for WriteMode {$/;"	i
+from	./src/client.rs	/^    fn from(res: hyper_client::response::Response) -> Response {$/;"	f
+from	./src/lib.rs	/^    fn from(e: rustc_serialize::json::DecoderError) -> ApiError {$/;"	f
+get_account	./src/users.rs	/^pub fn get_account<T>(client: &T, account_id: &str) -> Result<BasicAccount>$/;"	f
+get_account_batch	./src/users.rs	/^pub fn get_account_batch<T, U>(client: &T, account_ids: &[U]) -> Result<Vec<BasicAccount>>$/;"	f
+get_current_account	./src/users.rs	/^pub fn get_current_account<T>(client: &T) -> Result<FullAccount>$/;"	f
+get_folder_metadata	./src/sharing.rs	/^pub fn get_folder_metadata<T>(client: &T, shared_folder_id: &str) -> Result<Metadata>$/;"	f
+get_metadata	./src/files.rs	/^pub fn get_metadata<T>(client: &T, path: &str, include_media_info: bool) -> Result<Metadata>$/;"	f
+get_preview	./src/files.rs	/^pub fn get_preview<T>(client: &T, path: &str) -> Result<(Metadata, Response)>$/;"	f
+get_preview_to_file	./src/files.rs	/^pub fn get_preview_to_file<T>(client: &T, dest_path: &str, path: &str) -> Result<(Metadata, Response)>$/;"	f
+get_shared_links	./src/sharing.rs	/^pub fn get_shared_links<T>(client: &T, path: Option<&str>) -> Result<Vec<Metadata>>$/;"	f
+get_space_usage	./src/users.rs	/^pub fn get_space_usage<T>(client: &T) -> Result<SpaceUsage>$/;"	f
+get_thumbnail	./src/files.rs	/^pub fn get_thumbnail<T>(client: &T, path: &str) -> Result<(Metadata, Response)>$/;"	f
+get_thumbnail_to_file	./src/files.rs	/^pub fn get_thumbnail_to_file<T>(client: &T, dest_path: &str, path: &str) -> Result<(Metadata, Response)>$/;"	f
+get_thumbnail_to_file_with_options	./src/files.rs	/^pub fn get_thumbnail_to_file_with_options<T>(client: &T, dest_path: &str, path: &str, options: ThumbnailOptions) -> Result<(Metadata, Response)>$/;"	f
+get_thumbnail_with_options	./src/files.rs	/^pub fn get_thumbnail_with_options<T>(client: &T, path: &str, options: ThumbnailOptions) -> Result<(Metadata, Response)>$/;"	f
+list_folder	./src/files.rs	/^pub fn list_folder<T: DropboxClient>(client: &T, path: &str) -> Result<FolderList> {$/;"	f
+list_folder_continue	./src/files.rs	/^pub fn list_folder_continue<T>(client: &T, cursor: &str) -> Result<FolderList>$/;"	f
+list_folder_get_latest_cursor	./src/files.rs	/^pub fn list_folder_get_latest_cursor<T>(client: &T, path: &str) -> Result<String>$/;"	f
+list_folder_get_latest_cursor_with_options	./src/files.rs	/^pub fn list_folder_get_latest_cursor_with_options<T>(client: &T, path: &str, options: GetCursorOptions) -> Result<String>$/;"	f
+list_folder_longpoll	./src/files.rs	/^pub fn list_folder_longpoll<T>(client: &T, cursor: &str, timeout: usize) -> Result<FolderListLongpoll>$/;"	f
+list_folder_members	./src/sharing.rs	/^pub fn list_folder_members<T>(client: &T, shared_folder_id: &str) -> Result<SharedFolderMembers>$/;"	f
+list_folder_members_continue	./src/sharing.rs	/^pub fn list_folder_members_continue<T>(client: &T, cursor: &str) -> Result<SharedFolderMembers>$/;"	f
+list_folders	./src/sharing.rs	/^pub fn list_folders<T>(client: &T) -> Result<FolderList>$/;"	f
+list_folders_continue	./src/sharing.rs	/^pub fn list_folders_continue<T>(client: &T, cursor: &str) -> Result<FolderList>$/;"	f
+list_revisions	./src/files.rs	/^pub fn list_revisions<T>(client: &T, path: &str, limit: usize) -> Result<ListRevisions>$/;"	f
+max_connections	./src/client.rs	/^    pub fn max_connections(self, max_connections: u32) -> Client {$/;"	f
+max_retries	./src/client.rs	/^    pub fn max_retries(self, max_retries: u32) -> Client {$/;"	f
+mount_folder	./src/sharing.rs	/^pub fn mount_folder<T>(client: &T, shared_folder_id: &str) -> Result<Metadata>$/;"	f
+move_	./src/files.rs	/^pub fn move_<T>(client: &T, from: &str, to: &str) -> Result<Metadata>$/;"	f
+new	./src/client.rs	/^    pub fn new(token: &str) -> Result<Client> {$/;"	f
+permanently_delete	./src/files.rs	/^pub fn permanently_delete<T>(client: &T, path: &str) -> Result<()>$/;"	f
+proxies	./src/client.rs	/^    pub fn proxies(self, proxies: Vec<String>) -> Client {$/;"	f
+random_ascii_letters	./src/lib.rs	/^    fn random_ascii_letters(len: usize) -> String {$/;"	f
+relinquish_folder_membership	./src/sharing.rs	/^pub fn relinquish_folder_membership<T>(client: &T, shared_folder_id: &str) -> Result<()>$/;"	f
+remove_folder_member	./src/sharing.rs	/^pub fn remove_folder_member<T>(client: &T,$/;"	f
+request	./src/client.rs	/^    fn request<T>(&self, endpoint: Endpoint, url: &str, headers: &mut BTreeMap<String, String>, body: Option<T>) -> Result<Response>$/;"	f
+request	./src/lib.rs	/^    fn request<T>(&self, endpoint: Endpoint, url: &str, headers: &mut BTreeMap<String, String>, body: Option<T>) -> Result<Response>$/;"	f
+restore	./src/files.rs	/^pub fn restore<T>(client: &T, path: &str, rev: &str) -> Result<Metadata>$/;"	f
+revoke_shared_link	./src/sharing.rs	/^pub fn revoke_shared_link<T>(client: &T, url: &str) -> Result<()>$/;"	f
+search	./src/files.rs	/^pub fn search<T>(client: &T, path: &str, query: &str) -> Result<Search>$/;"	f
+search_with_options	./src/files.rs	/^pub fn search_with_options<T>(client: &T, path: &str, query: &str, options: SearchOptions) -> Result<Search>$/;"	f
+share_folder	./src/sharing.rs	/^pub fn share_folder<T>(client: &T, path: &str) -> Result<ShareFolderLaunch>$/;"	f
+share_folder_with_options	./src/sharing.rs	/^pub fn share_folder_with_options<T>(client: &T, path: &str, options: ShareFolderOptions) -> Result<ShareFolderLaunch>$/;"	f
+sharing	./src/lib.rs	/^pub mod sharing;$/;"	m
+structs	./src/lib.rs	/^pub mod structs;$/;"	m
+test_bad_auth	./src/lib.rs	/^    fn test_bad_auth() {$/;"	f
+test_list_rpc	./src/lib.rs	/^    fn test_list_rpc() {$/;"	f
+test_upload_download	./src/lib.rs	/^    fn test_upload_download() {$/;"	f
+tests	./src/lib.rs	/^mod tests {$/;"	m
+transfer_folder	./src/sharing.rs	/^pub fn transfer_folder<T>(client: &T, shared_folder_id: &str, to_dropbox_id: &str) -> Result<()>$/;"	f
+unmount_folder	./src/sharing.rs	/^pub fn unmount_folder<T>(client: &T, shared_folder_id: &str) -> Result<()>$/;"	f
+unshare_folder	./src/sharing.rs	/^pub fn unshare_folder<T>(client: &T, shared_folder_id: &str, leave_a_copy: bool) -> Result<()>$/;"	f
+update_folder_member	./src/sharing.rs	/^pub fn update_folder_member<T>(client: &T,$/;"	f
+update_folder_policy	./src/sharing.rs	/^pub fn update_folder_policy<T>(client: &T, shared_folder_id: &str) -> Result<Metadata>$/;"	f
+update_folder_policy_with_options	./src/sharing.rs	/^pub fn update_folder_policy_with_options<T>(client: &T, shared_folder_id: &str, options: UpdateFolderPolicyOptions) -> Result<Metadata>$/;"	f
+upload	./src/files.rs	/^pub fn upload<T>(client: &T, contents: &str, path: &str) -> Result<Metadata>$/;"	f
+upload_session_append	./src/files.rs	/^pub fn upload_session_append<T, U>(client: &T, f: U, session_id: &str, offset: usize) -> Result<()>$/;"	f
+upload_session_finish	./src/files.rs	/^pub fn upload_session_finish<T, U>(client: &T, f: U, cursor: &UploadSessionCursor, commit: &CommitInfo) -> Result<Metadata>$/;"	f
+upload_session_start	./src/files.rs	/^pub fn upload_session_start<T, U>(client: &T, f: U) -> Result<String>$/;"	f
+upload_with_options	./src/files.rs	/^pub fn upload_with_options<T>(client: &T, contents: &str, path: &str, options: UploadOptions) -> Result<Metadata>$/;"	f
+user_agent	./src/client.rs	/^    pub fn user_agent(self, user_agent: &str) -> Client {$/;"	f
+users	./src/lib.rs	/^pub mod users;$/;"	m
