@@ -7,7 +7,7 @@ readme = "README.adoc"
 description = """
 An unofficial Dropbox SDK
 """
-repository = "https://github.com/pwoolcoc/dropbox-rs"
+repository = "https://github.com/pwoolcoc/dbox"
 
 [features]
 default = ["hyper-client"]
