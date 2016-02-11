@@ -351,13 +351,8 @@ pub fn list_folder<T: DropboxClient>(client: &T, path: &str) -> Result<FolderLis
     map.insert("include_deleted".to_string(), json::Json::Boolean(false));
     let mut headers = BTreeMap::new();
     headers.insert("Content-Type".to_string(), "application/json".to_string());
-    match client.api("files/list_folder", &mut headers, Some(&map)) {
-        Ok(ref resp) => {
-            let folderlist: FolderList = json::decode(&resp.body).unwrap();
-            Ok(folderlist)
-        },
-        Err(e) => Err(ApiError::ClientError),
-    }
+    let resp = try!(client.api("files/list_folder", &mut headers, Some(&map)));
+    json::decode(&resp.body).map_err(ApiError::from)
 }
 
 /// TODO implement
