@@ -345,17 +345,20 @@ pub fn get_thumbnail_to_file_with_options<T>(client: &T, dest_path: &str, path: 
     ))
 }
 
-/// TODO implement, need FolderList deser
+/// TODO error handling
 pub fn list_folder<T: DropboxClient>(client: &T, path: &str) -> Result<FolderList> {
     let mut map = BTreeMap::new();
-    map.insert("path".to_string(), json::Json::String("/OpenBudget".to_string()));
+    map.insert("path".to_string(), json::Json::String(path.to_string()));
     map.insert("recursive".to_string(), json::Json::Boolean(false));
     map.insert("include_media_info".to_string(), json::Json::Boolean(false));
     map.insert("include_deleted".to_string(), json::Json::Boolean(false));
     let mut headers = BTreeMap::new();
     headers.insert("Content-Type".to_string(), "application/json".to_string());
     match client.api("files/list_folder", &mut headers, Some(&map)) {
-        Ok(_) => Ok(Default::default()),
+        Ok(ref resp) => {
+            let folderlist: FolderList = json::decode(&resp.body).unwrap();
+            Ok(folderlist)
+        },
         Err(e) => Err(ApiError::ClientError),
     }
 }

@@ -38,10 +38,10 @@ pub struct Metadata {
     name: String,
     path_lower: String,
     id: String,
-    client_modified: String,
-    server_modified: String,
-    rev: String,
-    size: usize,
+    size: Option<usize>,
+    rev: Option<String>,
+    client_modified: Option<String>,
+    server_modified: Option<String>,
     sharing_info: Option<SharingInfo>,
 }
 
@@ -69,11 +69,11 @@ impl Default for Metadata {
             tag: Tag::File,
             name: "".to_string(),
             path_lower: "".to_string(),
-            client_modified: "".to_string(),
-            server_modified: "".to_string(),
-            rev: "".to_string(),
-            size: 0,
             id: "".to_string(),
+            size: Some(0),
+            rev: Some("".to_string()),
+            client_modified: Some("".to_string()),
+            server_modified: Some("".to_string()),
             sharing_info: Some(SharingInfo {
                 read_only: false,
                 parent_shared_folder_id: "".to_string()
