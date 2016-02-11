@@ -209,11 +209,8 @@ mod tests {
 
         assert!(files::upload(&client, &random_contents, &random_path).is_ok());
 
-        files::list_folder(&client, &random_dir);
-
         assert!(files::copy_(&client, &random_path, &random_path_copy).is_ok());
 
-        println!("About to download file");
         let (metadata, resp) = files::download(&client, &random_path).unwrap();
         let body: String = json::decode(&resp.body).unwrap();
         assert_eq!(&body, &random_contents);

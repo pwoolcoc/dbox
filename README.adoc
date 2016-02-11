@@ -10,6 +10,17 @@ library, or use more advanced features.
 
 It is also very much lacking in tests and documentation.
 
+== What's working
+
+Right now the following API calls are available:
+
+  - `/files/copy`
+  - `/files/create_folder`
+  - `/files/delete`
+  - `/files/download`
+  - `/files/list_folder`
+  - `/files/upload`
+
 == Examples
 
 

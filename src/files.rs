@@ -458,14 +458,14 @@ pub fn search_with_options<T>(client: &T, path: &str, query: &str, options: Sear
     })
 }
 
-pub fn upload<T>(client: &T, contents: &str, path: &str) -> Result<Metadata>
+pub fn upload<T>(client: &T, contents: &str, path: &str) -> Result<FileMetadata>
                 where T: DropboxClient
 {
     upload_with_options(client, contents, path, Default::default())
 }
 
 /// TODO implement
-pub fn upload_with_options<T>(client: &T, contents: &str, path: &str, options: UploadOptions) -> Result<Metadata>
+pub fn upload_with_options<T>(client: &T, contents: &str, path: &str, options: UploadOptions) -> Result<FileMetadata>
                 where T: DropboxClient
 {
     let mut map = BTreeMap::new();
@@ -476,8 +476,8 @@ pub fn upload_with_options<T>(client: &T, contents: &str, path: &str, options: U
     let mut headers = BTreeMap::new();
     headers.insert("Dropbox-API-Arg".to_string(), json::encode(&map).unwrap());
     headers.insert("Content-Type".to_string(), "application/octet-stream".to_string());
-    let resp = client.content("files/upload", &mut headers, Some(contents.to_owned()));
-    Ok(Default::default())
+    let resp = try!(client.content("files/upload", &mut headers, Some(contents.to_owned())));
+    json::decode(&resp.body).map_err(ApiError::from)
 }
 
 /// TODO implement
