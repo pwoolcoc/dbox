@@ -186,8 +186,9 @@ mod tests {
             Err(_) => panic!("No {} found", ACCESS_TOKEN),
         };
         let client = Client::new(&access_token).unwrap();
-        files::create_folder(&client, "");
-        assert!(files::list_folder(&client, "").is_ok());
+        assert!(files::create_folder(&client, "/testdir").is_ok());
+        assert!(files::list_folder(&client, "/testdir").is_ok());
+        assert!(files::delete(&client, "/testdir").is_ok());
     }
 
     #[test]
@@ -199,19 +200,26 @@ mod tests {
         let random_filename = random_ascii_letters(15);
         let now: DateTime<Local> = Local::now();
         let now = format!("{}", now.timestamp());
+        let random_dir = format!("/Test/{}", now);
         let random_path = format!("/Test/{}/{}", now, random_filename);
+        let random_path_copy = format!("/Test/{}/{}copy", now, random_filename);
         let random_contents = random_ascii_letters(20);
 
         let client = Client::new(&access_token).unwrap();
+
         assert!(files::upload(&client, &random_contents, &random_path).is_ok());
 
-        assert!(files::copy_(&client, &random_path, &format!("/Test/{}/{}copy", now, random_filename)).is_ok());
+        files::list_folder(&client, &random_dir);
+
+        assert!(files::copy_(&client, &random_path, &random_path_copy).is_ok());
 
         println!("About to download file");
         let (metadata, resp) = files::download(&client, &random_path).unwrap();
         let body: String = json::decode(&resp.body).unwrap();
         assert_eq!(&body, &random_contents);
 
-        assert!(files::delete(&client, &format!("/Test/{}", now)).is_ok());
+        assert!(files::delete(&client, &random_path_copy).is_ok());
+        assert!(files::delete(&client, &random_path).is_ok());
+        assert!(files::delete(&client, &random_dir).is_ok());
     }
 }
