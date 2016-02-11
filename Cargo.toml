@@ -1,6 +1,6 @@
 [package]
 name = "dbox"
-version = "0.1.2"
+version = "0.1.3"
 authors = ["Paul Woolcock <paul@woolcock.us>"]
 license = "MIT/Apache-2.0"
 readme = "README.adoc"
