@@ -209,12 +209,20 @@ pub fn create_folder<T>(client: &T, path: &str) -> Result<Metadata>
     let mut headers = BTreeMap::new();
     headers.insert("Content-Type".to_string(), "application/json".to_string());
     let resp = try!(client.api("files/create_folder", &mut headers, Some(map)));
+    {
+        println!("create folder: {:?}", &resp.body);
+    }
     json::decode(&resp.body).map_err(|e| ApiError::from(e))
 }
 
 /// TODO implement
 pub fn delete<T: DropboxClient>(client: &T, path: &str) -> Result<Metadata> {
-    Ok(Default::default())
+    let mut map = BTreeMap::new();
+    map.insert("path".to_string(), json::Json::String(path.to_string()));
+    let mut headers = BTreeMap::new();
+    headers.insert("Content-Type".to_string(), "application/json".to_string());
+    let resp = try!(client.api("files/delete", &mut headers, Some(map)));
+    json::decode(&resp.body).map_err(|e| ApiError::from(e))
 }
 
 /// Download a file
