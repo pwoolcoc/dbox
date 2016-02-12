@@ -108,6 +108,14 @@ impl DropboxClient for Client {
         }
 
         hheaders.set(
+            ContentType(
+                Mime(
+                    TopLevel::Application, SubLevel::Json, vec![]
+                )
+            )
+        );
+
+        hheaders.set(
             Authorization(
                 Bearer {
                     token: self.access_token().to_owned(),

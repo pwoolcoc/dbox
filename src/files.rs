@@ -184,7 +184,6 @@ pub fn copy_<T>(client: &T, from: &str, to: &str) -> Result<Metadata>
     map.insert("from_path".to_string(), json::Json::String(from.to_string()));
     map.insert("to_path".to_string(), json::Json::String(to.to_string()));
     let mut headers = BTreeMap::new();
-    headers.insert("Content-Type".to_string(), "application/json".to_string());
     let resp = try!(client.api("files/copy", &mut headers, Some(&map)));
     json::decode(&resp.body).map_err(|e| ApiError::from(e))
 }
@@ -207,7 +206,6 @@ pub fn create_folder<T>(client: &T, path: &str) -> Result<NewFolder>
     let mut map = BTreeMap::new();
     map.insert("path".to_string(), json::Json::String(path.to_string()));
     let mut headers = BTreeMap::new();
-    headers.insert("Content-Type".to_string(), "application/json".to_string());
     let resp = try!(client.api("files/create_folder", &mut headers, Some(map)));
     json::decode(&resp.body).map_err(|e| ApiError::from(e))
 }
@@ -229,7 +227,6 @@ pub fn delete<T: DropboxClient>(client: &T, path: &str) -> Result<Metadata> {
     let mut map = BTreeMap::new();
     map.insert("path".to_string(), json::Json::String(path.to_string()));
     let mut headers = BTreeMap::new();
-    headers.insert("Content-Type".to_string(), "application/json".to_string());
     let resp = try!(client.api("files/delete", &mut headers, Some(map)));
     json::decode(&resp.body).map_err(|e| ApiError::from(e))
 }
@@ -388,7 +385,6 @@ pub fn list_folder<T: DropboxClient>(client: &T, path: &str) -> Result<FolderLis
     map.insert("include_media_info".to_string(), json::Json::Boolean(false));
     map.insert("include_deleted".to_string(), json::Json::Boolean(false));
     let mut headers = BTreeMap::new();
-    headers.insert("Content-Type".to_string(), "application/json".to_string());
     let resp = try!(client.api("files/list_folder", &mut headers, Some(&map)));
     json::decode(&resp.body).map_err(ApiError::from)
 }
@@ -517,7 +513,6 @@ pub fn upload_with_options<T>(client: &T, contents: &str, path: &str, options: U
     map.insert("mute", json::Json::Boolean(options.mute));
     let mut headers = BTreeMap::new();
     headers.insert("Dropbox-API-Arg".to_string(), json::encode(&map).unwrap());
-    headers.insert("Content-Type".to_string(), "application/octet-stream".to_string());
     let resp = try!(client.content("files/upload", &mut headers, Some(contents.to_owned())));
     json::decode(&resp.body).map_err(ApiError::from)
 }
