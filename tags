@@ -103,6 +103,7 @@ default	./src/structs.rs	/^    fn default() -> FolderList {$/;"	f
 default	./src/structs.rs	/^    fn default() -> Metadata {$/;"	f
 delete	./src/files.rs	/^pub fn delete<T: DropboxClient>(client: &T, path: &str) -> Result<Metadata> {$/;"	f
 download	./src/files.rs	/^pub fn download<T: DropboxClient>(client: &T, path: &str) -> Result<(FileMetadata, Response)> {$/;"	f
+download_to	./src/files.rs	/^pub fn download_to<T, U>(client: &T, path: &str, writer: U) -> Result<(Metadata, Response)>$/;"	f
 download_to_file	./src/files.rs	/^pub fn download_to_file<T>(client: &T, dest_path: &str, path: &str) -> Result<(Metadata, Response)>$/;"	f
 encode	./src/structs.rs	/^    fn encode<S: Encoder>(&self, encoder: &mut S) -> Result<(), S::Error> {$/;"	f
 files	./src/lib.rs	/^pub mod files;$/;"	m
@@ -116,7 +117,7 @@ get_account	./src/users.rs	/^pub fn get_account<T>(client: &T, account_id: &str)
 get_account_batch	./src/users.rs	/^pub fn get_account_batch<T, U>(client: &T, account_ids: &[U]) -> Result<Vec<BasicAccount>>$/;"	f
 get_current_account	./src/users.rs	/^pub fn get_current_account<T>(client: &T) -> Result<FullAccount>$/;"	f
 get_folder_metadata	./src/sharing.rs	/^pub fn get_folder_metadata<T>(client: &T, shared_folder_id: &str) -> Result<Metadata>$/;"	f
-get_metadata	./src/files.rs	/^pub fn get_metadata<T>(client: &T, path: &str, include_media_info: bool) -> Result<Metadata>$/;"	f
+get_metadata	./src/files.rs	/^pub fn get_metadata<T>(client: &T, path: &str, include_media_info: bool) -> Result<FileMetadata>$/;"	f
 get_preview	./src/files.rs	/^pub fn get_preview<T>(client: &T, path: &str) -> Result<(Metadata, Response)>$/;"	f
 get_preview_to_file	./src/files.rs	/^pub fn get_preview_to_file<T>(client: &T, dest_path: &str, path: &str) -> Result<(Metadata, Response)>$/;"	f
 get_shared_links	./src/sharing.rs	/^pub fn get_shared_links<T>(client: &T, path: Option<&str>) -> Result<Vec<Metadata>>$/;"	f

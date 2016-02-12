@@ -290,11 +290,29 @@ pub fn download_to<T, U>(client: &T, path: &str, writer: U) -> Result<(Metadata,
     ))
 }
 
-/// TODO implement
-pub fn get_metadata<T>(client: &T, path: &str, include_media_info: bool) -> Result<Metadata>
+/// Get metadata for a file
+///
+/// # Example
+///
+/// ```ignore
+/// use std::env;
+/// use dbox::client::Client;
+/// use dbox::files;
+///
+/// let client = Client::new(env::var("DROPBOX_TOKEN"));
+/// let metadata = try!(files::get_metadata(&client, "/path/to/file", false));
+/// ```
+///
+/// TODO error handling
+pub fn get_metadata<T>(client: &T, path: &str, include_media_info: bool) -> Result<FileMetadata>
                 where T: DropboxClient
 {
-    Ok(Default::default())
+    let mut map = BTreeMap::new();
+    map.insert("path", json::Json::String(path.to_string()));
+    map.insert("include_media_info", json::Json::Boolean(include_media_info));
+    let mut headers = BTreeMap::new();
+    let resp = try!(client.api("files/get_metadata", &mut headers, Some(map)));
+    json::decode(&resp.body).map_err(ApiError::from)
 }
 
 /// TODO implement

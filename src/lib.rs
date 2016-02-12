@@ -208,6 +208,7 @@ mod tests {
         let client = Client::new(&access_token).unwrap();
 
         assert!(files::upload(&client, &random_contents, &random_path).is_ok());
+        assert!(files::get_metadata(&client, &random_path, false));
 
         assert!(files::copy_(&client, &random_path, &random_path_copy).is_ok());
 
@@ -219,4 +220,5 @@ mod tests {
         assert!(files::delete(&client, &random_path).is_ok());
         assert!(files::delete(&client, &random_dir).is_ok());
     }
+
 }
