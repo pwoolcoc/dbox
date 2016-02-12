@@ -9,7 +9,7 @@ matrix:
   - rust: nightly
 before_script:
 - |
-  pip install git+https://github.com/pwoolcoc/travis-cargo.git --user &&
+  pip install travis-cargo --user &&
   export PATH=$HOME/.local/bin:$PATH
 script:
 - |
