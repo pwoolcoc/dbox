@@ -107,13 +107,15 @@ impl DropboxClient for Client {
             hheaders.set_raw(key.to_owned(), vec![value.to_owned().into_bytes()]);
         }
 
-        hheaders.set(
-            ContentType(
-                Mime(
-                    TopLevel::Application, SubLevel::Json, vec![]
+        if !headers.contains_key("Content-Type") {
+            hheaders.set(
+                ContentType(
+                    Mime(
+                        TopLevel::Application, SubLevel::Json, vec![]
+                    )
                 )
-            )
-        );
+            );
+        }
 
         hheaders.set(
             Authorization(

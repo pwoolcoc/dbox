@@ -249,6 +249,7 @@ pub fn download<T: DropboxClient>(client: &T, path: &str) -> Result<(FileMetadat
     map.insert("path".to_string(), json::Json::String(path.to_string()));
     let mut headers = BTreeMap::new();
     headers.insert("Dropbox-API-Arg".to_string(), json::encode(&map).unwrap());
+    headers.insert("Content-Type".to_string(), "".to_string());
     let resp = try!(client.content("files/download", &mut headers, None::<&str>));
     let metadata: FileMetadata = match resp.api_result {
         Some(ref data) => {
@@ -531,6 +532,7 @@ pub fn upload_with_options<T>(client: &T, contents: &str, path: &str, options: U
     map.insert("mute", json::Json::Boolean(options.mute));
     let mut headers = BTreeMap::new();
     headers.insert("Dropbox-API-Arg".to_string(), json::encode(&map).unwrap());
+    headers.insert("Content-Type".to_string(), "application/octet-stream".to_string());
     let resp = try!(client.content("files/upload", &mut headers, Some(contents.to_owned())));
     json::decode(&resp.body).map_err(ApiError::from)
 }
