@@ -22,6 +22,8 @@ Right now the following API calls are available:
   - `/files/download`
   - `/files/list_folder`
   - `/files/upload`
+  - `/files/get_metadata`
+  - `/files/move`
 
 == Examples
 

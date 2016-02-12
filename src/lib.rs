@@ -192,7 +192,7 @@ mod tests {
     }
 
     #[test]
-    fn test_upload_download() {
+    fn test_files() {
         let access_token = match env::var(ACCESS_TOKEN) {
             Ok(t) => t,
             Err(_) => panic!("No {} found", ACCESS_TOKEN),
@@ -203,20 +203,22 @@ mod tests {
         let random_dir = format!("/Test/{}", now);
         let random_path = format!("/Test/{}/{}", now, random_filename);
         let random_path_copy = format!("/Test/{}/{}copy", now, random_filename);
+        let random_path_move = format!("/Test/{}/{}move", now, random_filename);
         let random_contents = random_ascii_letters(20);
 
         let client = Client::new(&access_token).unwrap();
 
         assert!(files::upload(&client, &random_contents, &random_path).is_ok());
-        assert!(files::get_metadata(&client, &random_path, false));
+        assert!(files::get_metadata(&client, &random_path, false).is_ok());
 
         assert!(files::copy_(&client, &random_path, &random_path_copy).is_ok());
+        assert!(files::move_(&client, &random_path_copy, &random_path_move).is_ok());
 
         let (metadata, resp) = files::download(&client, &random_path).unwrap();
         let body: String = json::decode(&resp.body).unwrap();
         assert_eq!(&body, &random_contents);
 
-        assert!(files::delete(&client, &random_path_copy).is_ok());
+        assert!(files::delete(&client, &random_path_move).is_ok());
         assert!(files::delete(&client, &random_path).is_ok());
         assert!(files::delete(&client, &random_dir).is_ok());
     }

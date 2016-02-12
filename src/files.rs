@@ -449,11 +449,30 @@ pub fn list_revisions<T>(client: &T, path: &str, limit: usize) -> Result<ListRev
     })
 }
 
-/// TODO implement
+
+/// Move a file in a user's dropbox
+///
+/// # Example
+///
+/// ```ignore
+/// use std::env;
+/// use dbox::client::Client;
+/// use dbox::files;
+///
+/// let client = Client::new(env::var("DROPBOX_TOKEN"));
+/// let metadata = try!(files::move(&client, "/path/to/existing/file", "/path/to/new/location/for/file"));
+/// ```
+///
+/// TODO error handling
 pub fn move_<T>(client: &T, from: &str, to: &str) -> Result<Metadata>
                 where T: DropboxClient
 {
-    Ok(Default::default())
+    let mut map = BTreeMap::new();
+    map.insert("from_path", json::Json::String(from.to_string()));
+    map.insert("to_path", json::Json::String(to.to_string()));
+    let mut headers = BTreeMap::new();
+    let resp = try!(client.api("files/move", &mut headers, Some(map)));
+    json::decode(&resp.body).map_err(ApiError::from)
 }
 
 /// TODO implement
