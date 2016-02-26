@@ -8,6 +8,7 @@ description = """
 An unofficial Dropbox SDK
 """
 repository = "https://gitlab.com/pwoolcoc/dbox.git"
+homepage = "https://pwoolcoc.gitlab.io/dbox/dbox/"
 
 [features]
 default = ["hyper-client"]

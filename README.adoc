@@ -1,6 +1,6 @@
 = Unofficial Dropbox SDK for Rust
 
-image:https://travis-ci.org/pwoolcoc/dbox.svg?branch=master["Build Status", link="https://travis-ci.org/pwoolcoc/dbox"]
+image:https://gitlab.com/pwoolcoc/dbox/badges/master/build.svg["Build Status", link="https://travis-ci.org/pwoolcoc/dbox"]
 
 This is an (unofficial, as in not endorsed by) Dropbox SDK for
 https://rust-lang.org[Rust]. At present it is not complete, though the API is
