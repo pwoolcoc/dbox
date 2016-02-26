@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["Tag",""]],"struct":[["FileMetadata",""],["FolderList","Struct that is returned from the `list_folder` API call"],["Metadata",""],["NewFolder",""],["SharingInfo",""]]});

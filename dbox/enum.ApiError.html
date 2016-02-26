@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `ApiError` enum in crate `dbox`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, ApiError">
+
+    <title>dbox::ApiError - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
+    <link rel="stylesheet" type="text/css" href="../main.css">
+
+    
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        <p class='location'><a href='index.html'>dbox</a></p><script>window.sidebarCurrent = {name: 'ApiError', ty: 'enum', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content enum">
+<h1 class='fqn'><span class='in-band'>Enum <a href='index.html'>dbox</a>::<wbr><a class='enum' href=''>ApiError</a></span><span class='out-of-band'><span id='render-detail'>
+            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                [<span class='inner'>&#x2212;</span>]
+            </a>
+        </span><a id='src-41' class='srclink' href='../src/dbox/lib.rs.html#76-114' title='goto source code'>[src]</a></span></h1>
+<pre class='rust enum'>pub enum ApiError {
+    AddFolderMemberError,
+    ClientError,
+    CreateFolderError,
+    CreateSharedLinkError,
+    DeleteError,
+    DownloadError,
+    GetAccountError,
+    GetAccountBatchError,
+    GetMetadataError,
+    GetSharedLinksError,
+    ListFolderError,
+    ListFolderContinueError,
+    ListFolderLongpollError,
+    ListFolderMembersContinueError,
+    ListFoldersContinueError,
+    ListRevisionsError,
+    MountFolderError,
+    PollError,
+    PreviewError,
+    RelinquishFolderMembershipError,
+    RelocationError,
+    RemoveFolderMemberError,
+    RestoreError,
+    RevokeSharedLinkError,
+    SearchError,
+    ShareFolderError,
+    SharedFolderAccessError,
+    ThumbnailError,
+    TokenError,
+    TransferFolderError,
+    UnmountFolderError,
+    UnshareFolderError,
+    UpdateFolderMemberError,
+    UpdateFolderPolicyError,
+    UploadError,
+    UploadSessionLookupError,
+    UploadSessionFinishError,
+}</pre><div class='docblock'><p>Collection of possible errors</p>
+</div><h2 class='variants'>Variants</h2>
+<table><tr><td id='variant.AddFolderMemberError'><code>AddFolderMemberError</code></td><td></td></tr><tr><td id='variant.ClientError'><code>ClientError</code></td><td></td></tr><tr><td id='variant.CreateFolderError'><code>CreateFolderError</code></td><td></td></tr><tr><td id='variant.CreateSharedLinkError'><code>CreateSharedLinkError</code></td><td></td></tr><tr><td id='variant.DeleteError'><code>DeleteError</code></td><td></td></tr><tr><td id='variant.DownloadError'><code>DownloadError</code></td><td></td></tr><tr><td id='variant.GetAccountError'><code>GetAccountError</code></td><td></td></tr><tr><td id='variant.GetAccountBatchError'><code>GetAccountBatchError</code></td><td></td></tr><tr><td id='variant.GetMetadataError'><code>GetMetadataError</code></td><td></td></tr><tr><td id='variant.GetSharedLinksError'><code>GetSharedLinksError</code></td><td></td></tr><tr><td id='variant.ListFolderError'><code>ListFolderError</code></td><td></td></tr><tr><td id='variant.ListFolderContinueError'><code>ListFolderContinueError</code></td><td></td></tr><tr><td id='variant.ListFolderLongpollError'><code>ListFolderLongpollError</code></td><td></td></tr><tr><td id='variant.ListFolderMembersContinueError'><code>ListFolderMembersContinueError</code></td><td></td></tr><tr><td id='variant.ListFoldersContinueError'><code>ListFoldersContinueError</code></td><td></td></tr><tr><td id='variant.ListRevisionsError'><code>ListRevisionsError</code></td><td></td></tr><tr><td id='variant.MountFolderError'><code>MountFolderError</code></td><td></td></tr><tr><td id='variant.PollError'><code>PollError</code></td><td></td></tr><tr><td id='variant.PreviewError'><code>PreviewError</code></td><td></td></tr><tr><td id='variant.RelinquishFolderMembershipError'><code>RelinquishFolderMembershipError</code></td><td></td></tr><tr><td id='variant.RelocationError'><code>RelocationError</code></td><td></td></tr><tr><td id='variant.RemoveFolderMemberError'><code>RemoveFolderMemberError</code></td><td></td></tr><tr><td id='variant.RestoreError'><code>RestoreError</code></td><td></td></tr><tr><td id='variant.RevokeSharedLinkError'><code>RevokeSharedLinkError</code></td><td></td></tr><tr><td id='variant.SearchError'><code>SearchError</code></td><td></td></tr><tr><td id='variant.ShareFolderError'><code>ShareFolderError</code></td><td></td></tr><tr><td id='variant.SharedFolderAccessError'><code>SharedFolderAccessError</code></td><td></td></tr><tr><td id='variant.ThumbnailError'><code>ThumbnailError</code></td><td></td></tr><tr><td id='variant.TokenError'><code>TokenError</code></td><td></td></tr><tr><td id='variant.TransferFolderError'><code>TransferFolderError</code></td><td></td></tr><tr><td id='variant.UnmountFolderError'><code>UnmountFolderError</code></td><td></td></tr><tr><td id='variant.UnshareFolderError'><code>UnshareFolderError</code></td><td></td></tr><tr><td id='variant.UpdateFolderMemberError'><code>UpdateFolderMemberError</code></td><td></td></tr><tr><td id='variant.UpdateFolderPolicyError'><code>UpdateFolderPolicyError</code></td><td></td></tr><tr><td id='variant.UploadError'><code>UploadError</code></td><td></td></tr><tr><td id='variant.UploadSessionLookupError'><code>UploadSessionLookupError</code></td><td></td></tr><tr><td id='variant.UploadSessionFinishError'><code>UploadSessionFinishError</code></td><td></td></tr></table><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/convert/trait.From.html' title='core::convert::From'>From</a>&lt;<a class='enum' href='../rustc_serialize/json/enum.DecoderError.html' title='rustc_serialize::json::DecoderError'>DecoderError</a>&gt; for <a class='enum' href='../dbox/enum.ApiError.html' title='dbox::ApiError'>ApiError</a></code></h3><div class='impl-items'><h4 id='method.from' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/convert/trait.From.html#method.from' class='fnname'>from</a>(e: <a class='enum' href='../rustc_serialize/json/enum.DecoderError.html' title='rustc_serialize::json::DecoderError'>DecoderError</a>) -&gt; <a class='enum' href='../dbox/enum.ApiError.html' title='dbox::ApiError'>ApiError</a></code></h4>
+</div><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a> for <a class='enum' href='../dbox/enum.ApiError.html' title='dbox::ApiError'>ApiError</a></code></h3><div class='impl-items'><h4 id='method.clone' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone' class='fnname'>clone</a>(&amp;self) -&gt; <a class='enum' href='../dbox/enum.ApiError.html' title='dbox::ApiError'>ApiError</a></code></h4>
+<h4 id='method.clone_from' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: &amp;Self)</code></h4>
+</div><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html' title='core::cmp::PartialEq'>PartialEq</a> for <a class='enum' href='../dbox/enum.ApiError.html' title='dbox::ApiError'>ApiError</a></code></h3><div class='impl-items'><h4 id='method.eq' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#method.eq' class='fnname'>eq</a>(&amp;self, __arg_0: &amp;<a class='enum' href='../dbox/enum.ApiError.html' title='dbox::ApiError'>ApiError</a>) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
+<h4 id='method.ne' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#method.ne' class='fnname'>ne</a>(&amp;self, __arg_0: &amp;<a class='enum' href='../dbox/enum.ApiError.html' title='dbox::ApiError'>ApiError</a>) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
+</div><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='enum' href='../dbox/enum.ApiError.html' title='dbox::ApiError'>ApiError</a></code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#method.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
+</div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../";
+        window.currentCrate = "dbox";
+        window.playgroundUrl = "";
+    </script>
+    <script src="../jquery.js"></script>
+    <script src="../main.js"></script>
+    
+    <script defer src="../search-index.js"></script>
+</body>
+</html>

@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `files` mod in crate `dbox`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, files">
+
+    <title>dbox::files - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
+    <link rel="stylesheet" type="text/css" href="../../main.css">
+
+    
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        <p class='location'><a href='../index.html'>dbox</a></p><script>window.sidebarCurrent = {name: 'files', ty: 'mod', relpath: '../'};</script><script defer src="../sidebar-items.js"></script>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content mod">
+<h1 class='fqn'><span class='in-band'>Module <a href='../index.html'>dbox</a>::<wbr><a class='mod' href=''>files</a></span><span class='out-of-band'><span id='render-detail'>
+            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                [<span class='inner'>&#x2212;</span>]
+            </a>
+        </span><a id='src-299' class='srclink' href='../../src/dbox/files.rs.html#1-580' title='goto source code'>[src]</a></span></h1>
+<div class='docblock'><p>Module for performing operations on files in a dropbox account</p>
+</div><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
+<table>
+                    <tr class=' module-item'>
+                        <td><a class='struct' href='struct.CommitInfo.html'
+                               title='dbox::files::CommitInfo'>CommitInfo</a></td>
+                        <td class='docblock short'>
+                             
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='struct' href='struct.FolderListLongpoll.html'
+                               title='dbox::files::FolderListLongpoll'>FolderListLongpoll</a></td>
+                        <td class='docblock short'>
+                             
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='struct' href='struct.GetCursorOptions.html'
+                               title='dbox::files::GetCursorOptions'>GetCursorOptions</a></td>
+                        <td class='docblock short'>
+                             
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='struct' href='struct.ListRevisions.html'
+                               title='dbox::files::ListRevisions'>ListRevisions</a></td>
+                        <td class='docblock short'>
+                             
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='struct' href='struct.Search.html'
+                               title='dbox::files::Search'>Search</a></td>
+                        <td class='docblock short'>
+                             
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='struct' href='struct.SearchMatch.html'
+                               title='dbox::files::SearchMatch'>SearchMatch</a></td>
+                        <td class='docblock short'>
+                             
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='struct' href='struct.SearchOptions.html'
+                               title='dbox::files::SearchOptions'>SearchOptions</a></td>
+                        <td class='docblock short'>
+                             
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='struct' href='struct.ThumbnailOptions.html'
+                               title='dbox::files::ThumbnailOptions'>ThumbnailOptions</a></td>
+                        <td class='docblock short'>
+                             
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='struct' href='struct.UploadOptions.html'
+                               title='dbox::files::UploadOptions'>UploadOptions</a></td>
+                        <td class='docblock short'>
+                             <p>Optional arguments to the <code>upload</code> API call</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='struct' href='struct.UploadSessionCursor.html'
+                               title='dbox::files::UploadSessionCursor'>UploadSessionCursor</a></td>
+                        <td class='docblock short'>
+                             
+                        </td>
+                    </tr>
+                </table><h2 id='enums' class='section-header'><a href="#enums">Enums</a></h2>
+<table>
+                    <tr class=' module-item'>
+                        <td><a class='enum' href='enum.SearchMatchType.html'
+                               title='dbox::files::SearchMatchType'>SearchMatchType</a></td>
+                        <td class='docblock short'>
+                             
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='enum' href='enum.SearchMode.html'
+                               title='dbox::files::SearchMode'>SearchMode</a></td>
+                        <td class='docblock short'>
+                             
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='enum' href='enum.ThumbnailFormat.html'
+                               title='dbox::files::ThumbnailFormat'>ThumbnailFormat</a></td>
+                        <td class='docblock short'>
+                             
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='enum' href='enum.ThumbnailSize.html'
+                               title='dbox::files::ThumbnailSize'>ThumbnailSize</a></td>
+                        <td class='docblock short'>
+                             
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='enum' href='enum.WriteMode.html'
+                               title='dbox::files::WriteMode'>WriteMode</a></td>
+                        <td class='docblock short'>
+                             <p>Instructs dropbox what to do when a conflict happens during upload</p>
+
+                        </td>
+                    </tr>
+                </table><h2 id='functions' class='section-header'><a href="#functions">Functions</a></h2>
+<table>
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.copy_.html'
+                               title='dbox::files::copy_'>copy_</a></td>
+                        <td class='docblock short'>
+                             <p>Copy a file</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.create_folder.html'
+                               title='dbox::files::create_folder'>create_folder</a></td>
+                        <td class='docblock short'>
+                             <p>Create a folder</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.delete.html'
+                               title='dbox::files::delete'>delete</a></td>
+                        <td class='docblock short'>
+                             <p>Delete a file or folder from the user&#39;s dropbox acconut</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.download.html'
+                               title='dbox::files::download'>download</a></td>
+                        <td class='docblock short'>
+                             <p>Download a file</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.download_to.html'
+                               title='dbox::files::download_to'>download_to</a></td>
+                        <td class='docblock short'>
+                             
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.download_to_file.html'
+                               title='dbox::files::download_to_file'>download_to_file</a></td>
+                        <td class='docblock short'>
+                             <p>TODO implement</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.get_metadata.html'
+                               title='dbox::files::get_metadata'>get_metadata</a></td>
+                        <td class='docblock short'>
+                             <p>Get metadata for a file</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.get_preview.html'
+                               title='dbox::files::get_preview'>get_preview</a></td>
+                        <td class='docblock short'>
+                             <p>TODO implement</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.get_preview_to_file.html'
+                               title='dbox::files::get_preview_to_file'>get_preview_to_file</a></td>
+                        <td class='docblock short'>
+                             <p>TODO implement</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.get_thumbnail.html'
+                               title='dbox::files::get_thumbnail'>get_thumbnail</a></td>
+                        <td class='docblock short'>
+                             
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.get_thumbnail_to_file.html'
+                               title='dbox::files::get_thumbnail_to_file'>get_thumbnail_to_file</a></td>
+                        <td class='docblock short'>
+                             
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.get_thumbnail_to_file_with_options.html'
+                               title='dbox::files::get_thumbnail_to_file_with_options'>get_thumbnail_to_file_with_options</a></td>
+                        <td class='docblock short'>
+                             <p>TODO implement</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.get_thumbnail_with_options.html'
+                               title='dbox::files::get_thumbnail_with_options'>get_thumbnail_with_options</a></td>
+                        <td class='docblock short'>
+                             <p>TODO implement</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.list_folder.html'
+                               title='dbox::files::list_folder'>list_folder</a></td>
+                        <td class='docblock short'>
+                             <p>List the entries in a user&#39;s dropbox folder</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.list_folder_continue.html'
+                               title='dbox::files::list_folder_continue'>list_folder_continue</a></td>
+                        <td class='docblock short'>
+                             <p>TODO implement</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.list_folder_get_latest_cursor.html'
+                               title='dbox::files::list_folder_get_latest_cursor'>list_folder_get_latest_cursor</a></td>
+                        <td class='docblock short'>
+                             
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.list_folder_get_latest_cursor_with_options.html'
+                               title='dbox::files::list_folder_get_latest_cursor_with_options'>list_folder_get_latest_cursor_with_options</a></td>
+                        <td class='docblock short'>
+                             <p>TODO implement</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.list_folder_longpoll.html'
+                               title='dbox::files::list_folder_longpoll'>list_folder_longpoll</a></td>
+                        <td class='docblock short'>
+                             <p>TODO implement</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.list_revisions.html'
+                               title='dbox::files::list_revisions'>list_revisions</a></td>
+                        <td class='docblock short'>
+                             <p>TODO implement</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.move_.html'
+                               title='dbox::files::move_'>move_</a></td>
+                        <td class='docblock short'>
+                             <p>Move a file in a user&#39;s dropbox</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.permanently_delete.html'
+                               title='dbox::files::permanently_delete'>permanently_delete</a></td>
+                        <td class='docblock short'>
+                             <p>TODO implement</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.restore.html'
+                               title='dbox::files::restore'>restore</a></td>
+                        <td class='docblock short'>
+                             <p>TODO implement</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.search.html'
+                               title='dbox::files::search'>search</a></td>
+                        <td class='docblock short'>
+                             
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.search_with_options.html'
+                               title='dbox::files::search_with_options'>search_with_options</a></td>
+                        <td class='docblock short'>
+                             <p>TODO implement</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.upload.html'
+                               title='dbox::files::upload'>upload</a></td>
+                        <td class='docblock short'>
+                             <p>Upload a file to the user&#39;s dropbox acconut</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.upload_session_append.html'
+                               title='dbox::files::upload_session_append'>upload_session_append</a></td>
+                        <td class='docblock short'>
+                             <p>TODO implement</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.upload_session_finish.html'
+                               title='dbox::files::upload_session_finish'>upload_session_finish</a></td>
+                        <td class='docblock short'>
+                             <p>TODO implement</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.upload_session_start.html'
+                               title='dbox::files::upload_session_start'>upload_session_start</a></td>
+                        <td class='docblock short'>
+                             <p>TODO implement</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.upload_with_options.html'
+                               title='dbox::files::upload_with_options'>upload_with_options</a></td>
+                        <td class='docblock short'>
+                             <p>Upload a file to the user&#39;s dropbox acconut</p>
+
+                        </td>
+                    </tr>
+                </table></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../../";
+        window.currentCrate = "dbox";
+        window.playgroundUrl = "";
+    </script>
+    <script src="../../jquery.js"></script>
+    <script src="../../main.js"></script>
+    
+    <script defer src="../../search-index.js"></script>
+</body>
+</html>
