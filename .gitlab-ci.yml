@@ -1,7 +1,6 @@
 build:
   script:
     - cargo build --verbose --release
-    - cargo test --verbose
   tags:
     - rust
 pages:
