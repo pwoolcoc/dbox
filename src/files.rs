@@ -316,17 +316,37 @@ pub fn get_metadata<T>(client: &T, path: &str, include_media_info: bool) -> Resu
     json::decode(&resp.body).map_err(ApiError::from)
 }
 
-/// TODO implement
-pub fn get_preview<T>(client: &T, path: &str) -> Result<(Metadata, Response)>
+/// Get a preview for a file
+///
+/// # Example
+///
+/// ```ignore
+/// use std::env;
+/// use dbox::client::Client;
+/// use dbox::files;
+///
+/// let client = Client::new(env::var("DROPBOX_TOKEN"));
+/// let (metadata, response) = try!(files::get_preview(&client, "/path/to/file"));
+/// ```
+///
+/// TODO Error handling
+pub fn get_preview<T>(client: &T, path: &str) -> Result<(FileMetadata, Response)>
                 where T: DropboxClient
 {
-    Ok((
-        Default::default(),
-        Response {
-            status: 200,
-            api_result: None,
-            body: "".to_string(),
+    let mut map = BTreeMap::new();
+    map.insert("path".to_string(), json::Json::String(path.to_string()));
+    let mut headers = BTreeMap::new();
+    headers.insert("Dropbox-API-Arg".to_string(), json::encode(&map).unwrap());
+    let resp = try!(client.content("files/get_preview", &mut headers, None::<&str>));
+    let metadata: FileMetadata = match resp.api_result {
+        Some(ref data) => {
+            try!(json::decode(data))
         },
+        None => return Err(ApiError::ClientError)
+    };
+    Ok((
+        metadata,
+        resp,
     ))
 }
 
